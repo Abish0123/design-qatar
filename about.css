@@ -412,14 +412,6 @@ html, body {
 .value-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 15px; color: var(--text-dark); }
 .value-card p { font-size: 15px; line-height: 1.7; color: #666; }
 
-.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 60px; }
-.team-member-card { background-color: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.team-member-image { height: 300px; overflow: hidden; }
-.team-member-image img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.4s ease-out; }
-.team-member-info { padding: 25px; }
-.team-member-info h3 { font-size: 20px; font-weight: 700; margin-bottom: 5px; color: var(--text-dark); }
-.team-member-info p { font-size: 14px; color: var(--accent-color-dark-text); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-
 .cta-section {
     padding: 100px 60px;
     background-color: var(--dark-bg);
@@ -491,8 +483,6 @@ html, body {
     .value-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
     .value-card:hover .value-icon-wrapper { background-color: var(--accent-color); }
     .value-card:hover .value-icon { color: #fff; transform: scale(1.1) rotate(15deg); text-shadow: 0 0 12px rgba(255, 255, 255, 0.8); }
-    .team-member-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-    .team-member-card:hover .team-member-image img { transform: scale(1.05); }
     .cta-button:hover { background-color: transparent; color: var(--accent-color); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2), 0 0 20px rgba(212, 175, 55, 0.4); text-shadow: var(--accent-color-shadow); }
     .to-top:hover { text-shadow: var(--accent-color-shadow); }
     .custom-cursor-outline.cursor-hover { transform: translate(-50%, -50%) scale(1.6); background-color: var(--accent-color); border-color: transparent; opacity: 0.25 !important; }
@@ -514,7 +504,6 @@ html, body {
     .about-content-grid { grid-template-columns: 1fr; }
     .about-sidebar-image { order: -1; }
     .values-grid { grid-template-columns: repeat(2, 1fr); }
-    .team-grid { grid-template-columns: repeat(2, 1fr); }
     .logo-image { height: 40px; }
 }
 @media (max-width: 768px) {
@@ -526,10 +515,6 @@ html, body {
     .values-grid { grid-template-columns: 1fr; }
     .copyright-section { flex-direction: column; gap: 20px; text-align: center; }
     .logo-image { height: 35px; }
-}
-@media (max-width: 576px) {
-    .team-grid { grid-template-columns: 1fr; }
-    .team-member-image { height: 350px; }
 }
 @media (max-width: 480px) {
     .left-sidebar { display: none; }
