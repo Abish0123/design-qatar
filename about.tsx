@@ -403,8 +403,9 @@ const CustomCursor = memo(() => {
     const outlineRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) return;
+        if (isTouchDevice || prefersReducedMotion) return;
 
         const dot = dotRef.current;
         const outline = outlineRef.current;
@@ -448,7 +449,7 @@ const CustomCursor = memo(() => {
         document.body.addEventListener("mouseenter", showCursor);
 
         const hoverTargets = document.querySelectorAll(
-            'a, button, [role="button"], input, .value-card, .team-member-card, .whatsapp-widget, select, textarea, label'
+            'a, button, [role="button"], input, .value-card, .whatsapp-widget, select, textarea, label'
         );
         hoverTargets.forEach(target => {
             target.addEventListener('mouseenter', handleMouseEnterHoverTarget);
@@ -526,13 +527,6 @@ const AboutPage = () => {
         { icon: 'fas fa-star', title: 'Excellence', description: 'We pursue the highest standards in every aspect of our work, from initial concept to final execution and delivery.' },
         { icon: 'fas fa-users', title: 'Collaboration', description: 'We believe the best results come from teamwork, integrating diverse expertise to achieve a unified vision.' },
     ];
-    
-    const teamMembers = [
-        { name: 'John Doe', role: 'Founder & Principal Architect', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&auto=format&fit=crop&q=60', alt: 'Portrait of John Doe, Founder & Principal Architect at Taj Design Consultancy' },
-        { name: 'Jane Smith', role: 'Head of Engineering', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=60', alt: 'Portrait of Jane Smith, Head of Engineering at Taj Design Consultancy' },
-        { name: 'Sam Wilson', role: 'Lead Project Manager', image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=500&auto=format&fit=crop&q=60', alt: 'Portrait of Sam Wilson, Lead Project Manager at Taj Design Consultancy' },
-        { name: 'Emily White', role: 'Director of Sustainability', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60', alt: 'Portrait of Emily White, Director of Sustainability at Taj Design Consultancy' },
-    ];
 
 
   useEffect(() => {
@@ -590,25 +584,6 @@ const AboutPage = () => {
                 ))}
             </div>
           </div>
-      </section>
-      
-      <section id="our-team" className="content-section">
-        <div className="container">
-            <h2 className="section-title scroll-trigger fade-up" style={{ textAlign: 'center' }}>Meet Our <strong>Team</strong></h2>
-            <div className="team-grid">
-                {teamMembers.map((member, index) => (
-                    <div className="team-member-card scroll-trigger fade-up" key={index} style={{ transitionDelay: `${index * 0.1}s` }}>
-                        <div className="team-member-image">
-                            <img src={member.image} alt={member.alt} />
-                        </div>
-                        <div className="team-member-info">
-                            <h3>{member.name}</h3>
-                            <p>{member.role}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
       </section>
 
       <CallToAction />
