@@ -601,8 +601,9 @@ const BlueprintAnimation = memo(() => {
 });
 
 const HeroSection = () => {
+    const [offsetY, setOffsetY] = useState(0);
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
-    const heroContentRef = useRef<HTMLDivElement>(null);
     const titleLines = ["STRUCTURES WITH", "PURPOSE"];
     const fullTitle = titleLines.join(' ');
 
@@ -614,49 +615,18 @@ const HeroSection = () => {
 
     useEffect(() => {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion || !heroContentRef.current) return;
-        
-        const contentEl = heroContentRef.current;
-        const contentMouseParallax = 60;
-        let currentMousePos = { x: 0, y: 0 };
+        if (prefersReducedMotion) return;
 
-        const updateTransform = (offsetY = window.pageYOffset) => {
-            const parallaxTranslateY = offsetY * 0.7;
-            const mouseTranslateX = isMobile ? 0 : currentMousePos.x * contentMouseParallax;
-            const mouseTranslateY = isMobile ? 0 : currentMousePos.y * contentMouseParallax;
-
-            contentEl.style.opacity = `${Math.max(0, 1 - offsetY / (window.innerHeight * 0.8))}`;
-            contentEl.style.transform = `translate(${mouseTranslateX}px, ${parallaxTranslateY + mouseTranslateY}px)`;
-        };
-
-        const handleScroll = () => {
-            updateTransform();
-        };
-        
+        const handleScroll = () => setOffsetY(window.pageYOffset);
         const handleMouseMove = (e: MouseEvent) => {
-            const { clientX, clientY } = e;
-            const { innerWidth, innerHeight } = window;
-            currentMousePos = {
-                x: (clientX / innerWidth) - 0.5,
-                y: (clientY / innerHeight) - 0.5,
-            };
-            updateTransform();
+            const { clientX, clientY } = e; const { innerWidth, innerHeight } = window;
+            const x = (clientX / innerWidth) - 0.5; const y = (clientY / innerHeight) - 0.5;
+            setMousePos({ x, y });
         };
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        if (!isMobile) {
-            window.addEventListener('mousemove', handleMouseMove);
-        }
-        
-        handleScroll();
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            if (!isMobile) {
-                window.removeEventListener('mousemove', handleMouseMove);
-            }
-        };
-    }, [isMobile]);
+        window.addEventListener('scroll', handleScroll); window.addEventListener('mousemove', handleMouseMove);
+        return () => { window.removeEventListener('scroll', handleScroll); window.removeEventListener('mousemove', handleMouseMove); };
+    }, []);
 
     useEffect(() => {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -671,12 +641,17 @@ const HeroSection = () => {
         );
     }, []);
 
+    const contentMouseParallax = 60;
+
     return (
         <section className="hero-section">
             <video autoPlay loop muted playsInline className="hero-video" src="https://videos.pexels.com/video-files/4120241/4120241-uhd_3840_2160_25fps.mp4" aria-hidden="true" />
             <BlueprintAnimation />
-            {!isMobile && <ParticleCanvas />}
-            <div ref={heroContentRef} className="hero-content">
+            <ParticleCanvas />
+            <div className="hero-content" style={{
+                transform: `translate(${mousePos.x * contentMouseParallax}px, ${(offsetY * 0.7) + (mousePos.y * contentMouseParallax)}px)`,
+                opacity: Math.max(0, 1 - offsetY / (window.innerHeight * 0.8))
+            }}>
                 <h1 className="reveal-text" aria-label={fullTitle}>
                     {titleLines.map((line, lineIndex) => (
                         <div className="hero-title-line" key={lineIndex}>
