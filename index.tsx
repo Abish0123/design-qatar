@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useRef, memo, createContext, useContext, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -517,7 +518,7 @@ const ParticleCanvas = memo(() => {
 
         let animationFrameId: number;
         let particles: any[] = [];
-        const particleCount = 150;
+        let particleCount = 150;
 
         class Particle {
             x: number; y: number; vx: number; vy: number; radius: number; color: string; shadowBlur: number;
@@ -529,28 +530,33 @@ const ParticleCanvas = memo(() => {
                 this.color = `rgba(212, 175, 55, ${alpha})`; this.shadowBlur = Math.random() * 8 + 4;
             }
             draw() {
+                if (!ctx) return;
                 ctx.save(); ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                 ctx.shadowColor = 'rgba(212, 175, 55, 0.8)'; ctx.shadowBlur = this.shadowBlur;
                 ctx.fillStyle = this.color; ctx.fill(); ctx.restore();
             }
             update() {
                 this.x += this.vx; this.y += this.vy;
-                if (this.x > canvas.width + this.radius) this.x = -this.radius; else if (this.x < -this.radius) this.x = canvas.width + this.radius;
-                if (this.y > canvas.height + this.radius) this.y = -this.radius; else if (this.y < -this.radius) this.y = canvas.height + this.radius;
+                if (canvas && this.x > canvas.width + this.radius) this.x = -this.radius; else if (this.x < -this.radius) this.x = canvas.width + this.radius;
+                if (canvas && this.y > canvas.height + this.radius) this.y = -this.radius; else if (this.y < -this.radius) this.y = canvas.height + this.radius;
                 this.draw();
             }
         }
         
         const init = () => {
+            const isMobile = window.innerWidth < 768;
+            particleCount = isMobile ? 40 : 150; // Reduce particle count on mobile
             particles = [];
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
         };
-        const handleResize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); };
+        const handleResize = () => { if(canvas){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); }};
         const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(particle => particle.update());
+            if (ctx && canvas) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(particle => particle.update());
+            }
             animationFrameId = requestAnimationFrame(animate);
         };
 
@@ -615,18 +621,27 @@ const HeroSection = () => {
 
     useEffect(() => {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) return;
 
         const handleScroll = () => setOffsetY(window.pageYOffset);
+        window.addEventListener('scroll', handleScroll);
+
         const handleMouseMove = (e: MouseEvent) => {
             const { clientX, clientY } = e; const { innerWidth, innerHeight } = window;
             const x = (clientX / innerWidth) - 0.5; const y = (clientY / innerHeight) - 0.5;
             setMousePos({ x, y });
         };
 
-        window.addEventListener('scroll', handleScroll); window.addEventListener('mousemove', handleMouseMove);
-        return () => { window.removeEventListener('scroll', handleScroll); window.removeEventListener('mousemove', handleMouseMove); };
-    }, []);
+        if (!prefersReducedMotion && !isMobile) {
+            window.addEventListener('mousemove', handleMouseMove);
+        }
+
+        return () => { 
+            window.removeEventListener('scroll', handleScroll); 
+            if (!prefersReducedMotion && !isMobile) {
+                window.removeEventListener('mousemove', handleMouseMove); 
+            }
+        };
+    }, [isMobile]);
 
     useEffect(() => {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -649,7 +664,9 @@ const HeroSection = () => {
             <BlueprintAnimation />
             <ParticleCanvas />
             <div className="hero-content" style={{
-                transform: `translate(${mousePos.x * contentMouseParallax}px, ${(offsetY * 0.7) + (mousePos.y * contentMouseParallax)}px)`,
+                transform: isMobile 
+                    ? 'none'
+                    : `translate(${mousePos.x * contentMouseParallax}px, ${(offsetY * 0.7) + (mousePos.y * contentMouseParallax)}px)`,
                 opacity: Math.max(0, 1 - offsetY / (window.innerHeight * 0.8))
             }}>
                 <h1 className="reveal-text" aria-label={fullTitle}>
@@ -769,7 +786,7 @@ const ClientsCarousel = () => {
         { url: "https://pbs.twimg.com/profile_images/1508776406137856008/57PHPv7w_400x400.jpg", name: "Kahramaa" },
         { url: "https://res.cloudinary.com/dj3vhocuf/image/upload/v1762338839/Untitled_bkksjc.png", name: "Regency Group Holding" },
         { url: "https://res.cloudinary.com/dj3vhocuf/image/upload/v1762338838/Thyssenkrupp_AG_Logo_2015.svg_igmux4.png", name: "Thyssenkrupp" },
-        { url: "https://res.cloudinary.com/dj3vhocuf/image/upload/v1762338828/Maldives_Embassy_1_kwiwt1.png", name: "Embassy of Maldives" },
+        { url: "https://res.cloudinary.com/dj3vhocuf/image/upload/v1762374173/Untitled_design_-_2025-11-06T015236.578_h7mplk.png", name: "Embassy of Maldives" },
         { url: "https://res.cloudinary.com/dj3vhocuf/image/upload/v1762338827/5_fzbier.png", name: "Al Jabor Group" },
         { url: "https://res.cloudinary.com/dj3vhocuf/image/upload/v1762338827/logo_3_zeqqrp.png", name: "Milaha" },
         { url: "https://res.cloudinary.com/dj3vhocuf/image/upload/v1762338827/Untitled_design_-_2025-11-05T160138.102_wazfbk.png", name: "World Wide Business Center" },
@@ -957,7 +974,10 @@ const HomePage = () => {
       gallery: [
         'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761224706/WhatsApp_Image_2025-10-22_at_23.46.06_e814e5d0_uqphxj.png',
         'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761224698/WhatsApp_Image_2025-10-22_at_23.46.07_714b8d87_1_eljwpn.png',
-        'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761224698/WhatsApp_Image_2025-10-22_at_23.46.07_d6db18c5_tovqbt.png'
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761224698/WhatsApp_Image_2025-10-22_at_23.46.07_d6db18c5_tovqbt.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762371422/Untitled_design_-_2025-11-06T010523.469_cwiqrt.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762371422/Untitled_design_-_2025-11-06T010450.980_wdc5ah.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762371421/Untitled_design_-_2025-11-06T010619.313_g83cxj.png'
       ],
       alt: 'Interior design of the modern TrustLink office in Bin Mahmoud, Doha.'
     },
@@ -982,6 +1002,8 @@ const HomePage = () => {
       gallery: [
         'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761425803/Untitled_16_x_9_in_2_aypzfx.png',
         'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761425803/Untitled_16_x_9_in_3_m7smfu.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761425806/Untitled_16_x_9_in_mi6glx.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761425803/Untitled_16_x_9_in_1_ht1iux.png'
       ],
       alt: 'Architectural redesign of the Al Jabor commercial building in Al Hilal, Qatar.'
     },
@@ -1045,6 +1067,17 @@ const HomePage = () => {
     const servicesSection = document.getElementById('our-services');
 
     const handleScroll = () => {
+        const isMobile = window.innerWidth < 992;
+        if (isMobile) {
+            // On mobile, reset styles to avoid them being stuck from a resize
+            workImageContainers.forEach(container => {
+                const image = container.querySelector('img');
+                if (image) image.style.removeProperty('--parallax-y');
+            });
+            if (servicesSection) servicesSection.style.removeProperty('--bg-parallax-y');
+            return;
+        }
+
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) return;
 
@@ -1071,7 +1104,7 @@ const HomePage = () => {
     };
     
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    handleScroll(); // Initial call
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

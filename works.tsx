@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useRef, memo, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -36,7 +35,10 @@ const workItems = [
       gallery: [
         'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761224706/WhatsApp_Image_2025-10-22_at_23.46.06_e814e5d0_uqphxj.png',
         'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761224698/WhatsApp_Image_2025-10-22_at_23.46.07_714b8d87_1_eljwpn.png',
-        'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761224698/WhatsApp_Image_2025-10-22_at_23.46.07_d6db18c5_tovqbt.png'
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761224698/WhatsApp_Image_2025-10-22_at_23.46.07_d6db18c5_tovqbt.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762371422/Untitled_design_-_2025-11-06T010523.469_cwiqrt.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762371422/Untitled_design_-_2025-11-06T010450.980_wdc5ah.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762371421/Untitled_design_-_2025-11-06T010619.313_g83cxj.png'
       ],
       alt: 'Interior design of the modern TrustLink office in Bin Mahmoud, Doha.'
     },
@@ -99,7 +101,13 @@ const workItems = [
         'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761637875/Untitled_16_x_9_in_12_npf9j9.png',
         'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761637876/Untitled_16_x_9_in_15_v8kenj.png',
         'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761637875/Untitled_16_x_9_in_18_n9nsc0.png',
-        'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761637875/Untitled_16_x_9_in_16_lxxcfa.png'
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto,w_1200/v1761637875/Untitled_16_x_9_in_16_lxxcfa.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762372463/Untitled_design_-_2025-11-06T012345.564_enjpeb.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762372463/Untitled_design_-_2025-11-06T012333.622_quoc8y.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762372463/Untitled_design_-_2025-11-06T012306.358_acgepl.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762372463/Untitled_design_-_2025-11-06T012317.921_e9xuv2.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762372463/Untitled_design_-_2025-11-06T012217.915_uhu8cq.png',
+        'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762372463/Untitled_design_-_2025-11-06T012229.678_cibsms.png'
       ],
       alt: 'High-rise office interior fit-out at Al Jazeera Tower in Dafna, Doha.'
     }
