@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef, memo, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -388,8 +389,9 @@ const CustomCursor = memo(() => {
     const outlineRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) return;
+        if (isTouchDevice || prefersReducedMotion) return;
 
         const dot = dotRef.current;
         const outline = outlineRef.current;
