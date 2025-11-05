@@ -338,7 +338,7 @@ html, body {
     .app, .app a, .app button, .app [role="button"], .app input { cursor: auto !important; }
     .desktop-logo { display: none; }
     .mobile-logo { display: block; }
-    .logo-image { height: 60px; }
+    .logo-image { height: 50px; }
     .contact-grid { grid-template-columns: 1fr; gap: 50px; }
 }
 @media (max-width: 768px) {
