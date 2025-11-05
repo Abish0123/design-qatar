@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useRef, memo, createContext, useContext, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -1275,7 +1274,7 @@ const HomePage = () => {
             <span className="decorator-text">06</span>
         </div>
         <div className="container">
-          <h2 className="section-title scroll-trigger fade-up">From <strong>The Blog</strong></h2>
+          <h2 className="section-title scroll-trigger fade-up" style={{ textAlign: 'center' }}>From <strong>The Blog</strong></h2>
           <div className="blog-grid">
             {blogPosts.map((post, index) => (
                 <div className="blog-item scroll-trigger fade-up" key={index} style={{ transitionDelay: `${index * 0.1}s` }}>
