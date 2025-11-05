@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect, useRef, memo, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -484,7 +482,6 @@ const ContactForm = () => {
 
     useEffect(() => {
         if (isSubmitted) {
-            // FIX: Removed explicit cast to HTMLElement to resolve 'focus' on 'unknown' type error by relying on the ref's generic type.
             successMessageRef.current?.focus();
         }
     }, [isSubmitted]);
@@ -532,7 +529,7 @@ const ContactForm = () => {
     };
     
     return (
-        <div className="contact-form-container scroll-trigger fade-up" style={{transitionDelay: '0.2s'}}>
+        <div className="contact-form-container scroll-trigger fade-up" style={{transitionDelay: '0.1s'}}>
             <form onSubmit={handleSubmit} className={`contact-form ${isSubmitted ? 'submitted' : ''}`} aria-hidden={isSubmitted} noValidate>
                  <div className="form-row">
                     <div className="form-group">
@@ -563,7 +560,14 @@ const ContactForm = () => {
 };
 
 
-const ContactPage = () => (
+const ContactPage = () => {
+    const contactDetails = [
+        { icon: 'fas fa-phone', title: 'Call Us', content: <a href="tel:+97477123400">+974 7712 3400</a> },
+        { icon: 'fas fa-envelope', title: 'Email Us', content: <a href="mailto:info@tajdc.com">info@tajdc.com</a> },
+        { icon: 'fas fa-map-marker-alt', title: 'Visit Us', content: <p>14th floor, Al Jazeera tower, Westbay, Doha, Qatar</p> },
+    ];
+
+    return (
     <>
       <section className="contact-hero-section scroll-trigger fade-up">
         <div className="container">
@@ -572,35 +576,31 @@ const ContactPage = () => (
         </div>
       </section>
 
-      <section id="contact-details" className="content-section">
+      <section id="contact-info" className="contact-info-section content-section">
         <div className="container">
-            <div className="contact-grid">
-                <div>
-                    <h2 className="section-title scroll-trigger fade-up">Contact <strong>Details</strong></h2>
-                    <div className="contact-info-items">
-                        <div className="contact-info-item scroll-trigger fade-up" style={{transitionDelay: '0.1s'}}>
-                            <div className="icon-wrapper"><i className="fas fa-map-marker-alt" aria-hidden="true"></i></div>
-                            <div>
-                                <h4>Our Office</h4>
-                                <p>14th floor, Al Jazeera tower, Westbay, Doha, Qatar</p>
-                            </div>
-                        </div>
-                        <div className="contact-info-item scroll-trigger fade-up" style={{transitionDelay: '0.2s'}}>
-                            <div className="icon-wrapper"><i className="fas fa-envelope" aria-hidden="true"></i></div>
-                            <div>
-                                <h4>Email Us</h4>
-                                <p><a href="mailto:info@tajdc.com">info@tajdc.com</a></p>
-                            </div>
-                        </div>
-                        <div className="contact-info-item scroll-trigger fade-up" style={{transitionDelay: '0.3s'}}>
-                            <div className="icon-wrapper"><i className="fas fa-phone" aria-hidden="true"></i></div>
-                            <div>
-                                <h4>Call Us</h4>
-                                <p><a href="tel:+97477123400">+974 7712 3400</a></p>
-                            </div>
-                        </div>
+            <div className="contact-info-grid">
+                {contactDetails.map((detail, index) => (
+                    <div className="contact-info-card scroll-trigger fade-up" key={index} style={{transitionDelay: `${index * 0.1}s`}}>
+                        <div className="icon-wrapper"><i className={detail.icon} aria-hidden="true"></i></div>
+                        <h4>{detail.title}</h4>
+                        {detail.content}
                     </div>
-                    <div className="map-container scroll-trigger fade-up" style={{transitionDelay: '0.4s'}}>
+                ))}
+            </div>
+        </div>
+      </section>
+
+      <section id="contact-main" className="contact-main-section content-section">
+        <div className="container">
+             <div className="contact-main-grid">
+                <div className="contact-form-wrapper">
+                    <h2 className="section-title" style={{textAlign: 'left'}}>Send Us A <strong>Message</strong></h2>
+                    <ContactForm />
+                </div>
+                 <div className="map-wrapper scroll-trigger fade-up" style={{transitionDelay: '0.2s'}}>
+                    <h2 className="section-title" style={{textAlign: 'left'}}>Find Us <strong>Here</strong></h2>
+                    <p>Our office is centrally located in Westbay, Doha. We welcome you to visit us for a consultation. Please schedule an appointment in advance.</p>
+                    <div className="map-container">
                        <iframe
                             src="https://maps.google.com/maps?q=Al%20Jazeera%20Tower,%20Doha&t=&z=15&ie=UTF8&iwloc=&output=embed"
                             width="600"
@@ -613,15 +613,12 @@ const ContactPage = () => (
                         ></iframe>
                     </div>
                 </div>
-                <div className="contact-form-wrapper">
-                    <h2 className="section-title scroll-trigger fade-up">Send Us a <strong>Message</strong></h2>
-                    <ContactForm />
-                </div>
             </div>
         </div>
       </section>
     </>
 );
+}
 
 const App = () => {
     const [loading, setLoading] = useState(true);
