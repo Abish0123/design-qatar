@@ -1,4 +1,3 @@
-
 :root {
   --dark-bg: #111111;
   --dark-bg-secondary: #1c1c1c;
@@ -255,6 +254,7 @@ html, body {
     text-align: left;
     cursor: pointer;
     width: 100%;
+    text-decoration: none;
 }
 .blog-item-image {
     height: 220px;
