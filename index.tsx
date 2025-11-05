@@ -20,7 +20,7 @@ const navLinks = [
   { name: 'About Us', href: '/about.html' },
   { name: 'Works/Projects', href: '/works.html' },
   { name: 'Services', href: '/index.html#our-services', subLinks: servicesSubLinks },
-  { name: 'Blog', href: '/index.html#blog' },
+  { name: 'Blog', href: '/blog.html' },
   { name: 'Careers', href: '/careers.html' },
   { name: 'Contact', href: '/contact.html' },
 ];
@@ -923,54 +923,6 @@ const ProjectGalleryModal = ({ project, onClose }) => {
     );
 };
 
-const BlogModal = ({ post, onClose }) => {
-    const modalRef = useRef<HTMLDivElement>(null);
-    const lastFocusedElement = useRef<HTMLElement | null>(null);
-
-    useEffect(() => {
-        if (post) {
-            lastFocusedElement.current = document.activeElement as HTMLElement;
-            setTimeout(() => modalRef.current?.focus(), 100);
-
-            const handleKeyDown = (e: KeyboardEvent) => {
-                if (e.key === 'Escape') onClose();
-                else if (e.key === 'Tab') {
-                     const focusableElements = modalRef.current?.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-                    if (!focusableElements || focusableElements.length === 0) return;
-                    const firstElement = focusableElements[0];
-                    const lastElement = focusableElements[focusableElements.length - 1];
-                    if (e.shiftKey) { if (document.activeElement === firstElement) { lastElement.focus(); e.preventDefault(); }}
-                    else { if (document.activeElement === lastElement) { firstElement.focus(); e.preventDefault(); }}
-                }
-            };
-
-            document.addEventListener('keydown', handleKeyDown);
-            return () => { 
-                document.removeEventListener('keydown', handleKeyDown);
-                lastFocusedElement.current?.focus();
-            };
-        }
-    }, [post, onClose]);
-
-    if (!post) return null;
-
-    return (
-        <div className="project-modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="blog-modal-title">
-            <div ref={modalRef} className="project-modal-content blog-modal-content" onClick={e => e.stopPropagation()} tabIndex={-1}>
-                <button onClick={onClose} className="project-modal-close" aria-label="Close blog post">&times;</button>
-                <div className="blog-modal-image">
-                    <img src={post.image} alt={post.title} />
-                </div>
-                <div className="project-modal-details blog-modal-details">
-                    <p className="modal-meta">{post.category} / {post.date}</p>
-                    <h3 id="blog-modal-title" className="modal-title">{post.title}</h3>
-                    <p className="modal-description">{post.description}</p>
-                </div>
-            </div>
-        </div>
-    );
-};
-
 const SectionDivider = () => (
     <div className="section-divider-wrapper">
         <div className="section-divider" />
@@ -1006,7 +958,6 @@ const useSmoothScroll = () => {
 
 const HomePage = () => {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [selectedBlog, setSelectedBlog] = useState(null);
   const factsContainerRef = useRef<HTMLDivElement | null>(null);
   const clientsContainerRef = useRef<HTMLDivElement | null>(null);
   
@@ -1177,7 +1128,6 @@ const HomePage = () => {
   return (
     <>
       <ProjectGalleryModal project={selectedProject} onClose={() => setSelectedProject(null)} />
-      <BlogModal post={selectedBlog} onClose={() => setSelectedBlog(null)} />
       <HeroSection />
       
       <section id="about" className="content-section section-bg-white scroll-trigger fade-up">
@@ -1345,14 +1295,14 @@ const HomePage = () => {
           <h2 className="section-title scroll-trigger fade-up" style={{ textAlign: 'center' }}>From <strong>The Blog</strong></h2>
           <div className="blog-grid">
             {blogPosts.map((post, index) => (
-                <button className="blog-item scroll-trigger fade-up" key={index} style={{ transitionDelay: `${index * 0.1}s` }} onClick={() => setSelectedBlog(post)} aria-label={`Read more about ${post.title}`}>
+                <a href="/blog.html" className="blog-item scroll-trigger fade-up" key={index} style={{ transitionDelay: `${index * 0.1}s` }} aria-label={`Read more about ${post.title}`}>
                     <div className="blog-item-image" style={{backgroundImage: `url(${post.image})`}} aria-hidden="true" />
                     <div className="blog-item-content">
                         <p className="blog-item-meta">{post.category} / {post.date}</p>
                         <h3 className="blog-item-title">{post.title}</h3>
                         <span className="blog-item-link">Read More <i className="fas fa-arrow-right" aria-hidden="true"></i></span>
                     </div>
-                </button>
+                </a>
             ))}
           </div>
         </div>
