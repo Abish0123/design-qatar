@@ -27,25 +27,28 @@ const navLinks = [
 
 const blogPosts = [
     { 
+      slug: "crafting-tomorrow-sustainable-living",
+      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=60", 
+      category: "Sustainability", 
+      date: "October 24, 2024", 
+      title: "Crafting Tomorrow: Sustainable Living in Residential Architecture",
+      description: "Explore the fundamental principles and innovative strategies behind creating eco-friendly homes for a greener future."
+    },
+    { 
+      slug: "the-future-of-bim",
       image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop&q=60", 
       category: "Technology", 
       date: "August 15, 2024", 
       title: "The Future of BIM: AI and Generative Design",
-      description: "A detailed look into how Building Information Modeling is evolving with artificial intelligence. We explore generative design algorithms that optimize for space, materials, and energy efficiency, paving the way for smarter, more sustainable construction practices. This article discusses the practical applications and future potential of AI in architecture."
+      description: "A detailed look into how Building Information Modeling is evolving with artificial intelligence, paving the way for smarter construction."
     },
     { 
-      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&auto=format&fit=crop&q=60", 
-      category: "Architecture", 
-      date: "August 10, 2024", 
-      title: "Sustainable Materials in Modern Construction",
-      description: "This post explores the latest trends in eco-friendly building materials. From bamboo and reclaimed wood to innovative composites and green concrete, we examine the benefits, challenges, and applications of these materials in creating sustainable and resilient structures that reduce environmental impact without compromising on design."
-    },
-    { 
+      slug: "minimalism-and-light",
       image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=60", 
       category: "Interior Design", 
       date: "August 05, 2024", 
       title: "Minimalism and Light: Crafting Serene Spaces",
-      description: "Discover the principles of minimalist interior design and the crucial role of natural and artificial light. This article provides insights into creating calm, uncluttered, and functional spaces that promote well-being. We'll look at case studies that masterfully use light to enhance texture, define space, and evoke a sense of tranquility."
+      description: "Discover the principles of minimalist interior design and the crucial role of light in creating calm, uncluttered, and functional spaces."
     }
 ];
 
@@ -353,61 +356,9 @@ const WhatsAppChatWidget = () => (
     </a>
 );
 
-const BlogModal = ({ post, onClose }) => {
-    const modalRef = useRef<HTMLDivElement>(null);
-    const lastFocusedElement = useRef<HTMLElement | null>(null);
-
-    useEffect(() => {
-        if (post) {
-            lastFocusedElement.current = document.activeElement as HTMLElement;
-            setTimeout(() => modalRef.current?.focus(), 100);
-
-            const handleKeyDown = (e: KeyboardEvent) => {
-                if (e.key === 'Escape') onClose();
-                else if (e.key === 'Tab') {
-                     const focusableElements = modalRef.current?.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-                    if (!focusableElements || focusableElements.length === 0) return;
-                    const firstElement = focusableElements[0];
-                    const lastElement = focusableElements[focusableElements.length - 1];
-                    if (e.shiftKey) { if (document.activeElement === firstElement) { lastElement.focus(); e.preventDefault(); }}
-                    else { if (document.activeElement === lastElement) { firstElement.focus(); e.preventDefault(); }}
-                }
-            };
-
-            document.addEventListener('keydown', handleKeyDown);
-            return () => { 
-                document.removeEventListener('keydown', handleKeyDown);
-                lastFocusedElement.current?.focus();
-            };
-        }
-    }, [post, onClose]);
-
-    if (!post) return null;
-
-    return (
-        <div className="project-modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="blog-modal-title">
-            <div ref={modalRef} className="project-modal-content blog-modal-content" onClick={e => e.stopPropagation()} tabIndex={-1}>
-                <button onClick={onClose} className="project-modal-close" aria-label="Close blog post">&times;</button>
-                <div className="blog-modal-image">
-                    <img src={post.image} alt={post.title} />
-                </div>
-                <div className="project-modal-details blog-modal-details">
-                    <p className="modal-meta">{post.category} / {post.date}</p>
-                    <h3 id="blog-modal-title" className="modal-title">{post.title}</h3>
-                    <p className="modal-description">{post.description}</p>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-
 const BlogPage = () => {
-    const [selectedPost, setSelectedPost] = useState(null);
-
     return (
         <>
-            <BlogModal post={selectedPost} onClose={() => setSelectedPost(null)} />
             <section className="blog-hero-section">
                 <h1>From The <strong>Blog</strong></h1>
             </section>
@@ -415,14 +366,14 @@ const BlogPage = () => {
                 <div className="container">
                     <div className="blog-grid">
                         {blogPosts.map((post, index) => (
-                            <button className="blog-item" key={index} onClick={() => setSelectedPost(post)} aria-label={`Read more about ${post.title}`}>
+                            <a href={`/blog-post.html?post=${post.slug}`} className="blog-item" key={index} aria-label={`Read more about ${post.title}`}>
                                 <div className="blog-item-image" style={{backgroundImage: `url(${post.image})`}} aria-hidden="true" />
                                 <div className="blog-item-content">
                                     <p className="blog-item-meta">{post.category} / {post.date}</p>
                                     <h3 className="blog-item-title">{post.title}</h3>
                                     <span className="blog-item-link">Read Full Article <i className="fas fa-arrow-right" aria-hidden="true"></i></span>
                                 </div>
-                            </button>
+                            </a>
                         ))}
                     </div>
                 </div>
