@@ -1337,25 +1337,58 @@ const HomePage = () => {
       </section>
 
       <section id="blog" className="content-section section-bg-white scroll-trigger fade-up has-divider">
-        <SectionDivider />
-        <div className="section-decorator decorator-left decorator-06 scroll-trigger" aria-hidden="true">
-            <span className="decorator-text">06</span>
-        </div>
-        <div className="container">
-          <h2 className="section-title scroll-trigger fade-up" style={{ textAlign: 'center' }}>From <strong>The Blog</strong></h2>
-          <div className="blog-grid">
-            {blogPosts.map((post, index) => (
-                <button className="blog-item scroll-trigger fade-up" key={index} style={{ transitionDelay: `${index * 0.1}s` }} onClick={() => setSelectedBlog(post)} aria-label={`Read more about ${post.title}`}>
-                    <div className="blog-item-image" style={{backgroundImage: `url(${post.image})`}} aria-hidden="true" />
-                    <div className="blog-item-content">
-                        <p className="blog-item-meta">{post.category} / {post.date}</p>
-                        <h3 className="blog-item-title">{post.title}</h3>
-                        <span className="blog-item-link">Read More <i className="fas fa-arrow-right" aria-hidden="true"></i></span>
-                    </div>
-                </button>
-            ))}
+          <SectionDivider />
+          <div className="section-decorator decorator-left decorator-06 scroll-trigger" aria-hidden="true">
+              <span className="decorator-text">06</span>
           </div>
-        </div>
+          <div className="container">
+              <h2 className="section-title scroll-trigger fade-up" style={{ textAlign: 'center' }}>From <strong>The Blog</strong></h2>
+              <div className="blog-grid">
+                  {blogPosts.length > 0 &&
+                      (() => {
+                          const featuredPost = blogPosts[0];
+                          const otherPosts = blogPosts.slice(1);
+                          return (
+                              <>
+                                  <button
+                                      className="blog-item featured scroll-trigger fade-up"
+                                      onClick={() => setSelectedBlog(featuredPost)}
+                                      aria-label={`Read more about ${featuredPost.title}`}
+                                  >
+                                      <div className="blog-item-image" style={{ backgroundImage: `url(${featuredPost.image})` }} aria-hidden="true" />
+                                      <div className="blog-item-content">
+                                          <p className="blog-item-meta">
+                                              <span className="blog-category-tag">{featuredPost.category}</span> / {featuredPost.date}
+                                          </p>
+                                          <h3 className="blog-item-title">{featuredPost.title}</h3>
+                                          <p className="blog-item-excerpt">{featuredPost.description.substring(0, 150)}...</p>
+                                          <span className="blog-item-link">Read More <i className="fas fa-arrow-right" aria-hidden="true"></i></span>
+                                      </div>
+                                  </button>
+                                  {otherPosts.map((post, index) => (
+                                      <button 
+                                        className="blog-item scroll-trigger fade-up" 
+                                        key={post.title} 
+                                        style={{ transitionDelay: `${index * 0.1}s` }} 
+                                        onClick={() => setSelectedBlog(post)}
+                                        aria-label={`Read more about ${post.title}`}
+                                      >
+                                          <div className="blog-item-image" style={{ backgroundImage: `url(${post.image})` }} aria-hidden="true" />
+                                          <div className="blog-item-content">
+                                              <p className="blog-item-meta">
+                                                  <span className="blog-category-tag">{post.category}</span> / {post.date}
+                                              </p>
+                                              <h3 className="blog-item-title">{post.title}</h3>
+                                              <span className="blog-item-link">Read More <i className="fas fa-arrow-right" aria-hidden="true"></i></span>
+                                          </div>
+                                      </button>
+                                  ))}
+                              </>
+                          );
+                      })()
+                  }
+              </div>
+          </div>
       </section>
 
       <section id="testimonials" className="content-section section-bg-dark scroll-trigger fade-up has-divider" style={{backgroundImage: `url(https://images.pexels.com/photos/157811/pexels-photo-157811.jpeg?cs=srgb&dl=pexels-yentl-jacobs-43020-157811.jpg&fm=jpg)`}}>
