@@ -193,7 +193,7 @@
   }
 
   .logo-image {
-      height: 80px;
+      height: 50px;
       width: auto;
   }
   
@@ -871,7 +871,7 @@
       .application-form .form-row { flex-direction: column; gap: 20px; margin-bottom: 0; }
       .copyright-section { flex-direction: column; gap: 20px; text-align: center; }
       .logo-image {
-        height: 60px;
+        height: 50px;
       }
   }
   
