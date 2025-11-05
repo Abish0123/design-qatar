@@ -1,4 +1,3 @@
-
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -25,6 +24,8 @@ export default defineConfig(({ mode }) => {
             'sustainability-energy': path.resolve('sustainability-energy.html'),
             'construction-approval': path.resolve('construction-approval.html'),
             works: path.resolve('works.html'),
+            blog: path.resolve('blog.html'),
+            'blog-post': path.resolve('blog-post.html'),
           },
         },
       },
