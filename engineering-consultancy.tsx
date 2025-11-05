@@ -396,9 +396,8 @@ const CustomCursor = memo(() => {
     const outlineRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (isTouchDevice || prefersReducedMotion) return;
+        if (prefersReducedMotion) return;
 
         const dot = dotRef.current;
         const outline = outlineRef.current;
