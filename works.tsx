@@ -74,7 +74,7 @@ const workItems = [
       alt: 'Architectural redesign of the Al Jabor commercial building in Al Hilal, Qatar.'
     },
     {
-      title: 'Legal office for Sheikh Jassim Al Thani',
+      title: 'Legal office for Shaiek Jassim Al Thani',
       meta: 'End-to-end interior design and fit-out supervision',
       location: 'Westbay',
       description: 'Interior design and supervision for turnkey fit-out works—covering concept to handover—with full life-safety compliance to QCDD/NFPA codes. Services include 3D renders and visualizations, coordinated MEP layouts, furniture and finishes selection, technical specifications, detailed BOQs, and on-site supervision/QA to ensure quality, budget control, and timely delivery.',
@@ -333,7 +333,7 @@ const Header = ({ theme }) => {
     <header className={headerClasses}>
       <div className="logo">
         <AppLink href="/index.html">
-          <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1760896759/Blue_Bold_Office_Idea_Logo_250_x_80_px_7_uatyqd.png" alt="Taj Design Consultancy Logo - Architectural Firm in Qatar" className="logo-image" />
+          <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1762341232/DESign_220_x_60_px_abhv5e.png" alt="Taj Design Consultancy Logo" className="logo-image" />
         </AppLink>
       </div>
       <nav className="main-nav" aria-label="Main navigation">
