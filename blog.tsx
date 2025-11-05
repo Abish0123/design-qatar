@@ -1,0 +1,462 @@
+
+import React, { useState, useEffect, useRef, memo, MouseEventHandler } from 'react';
+import { createRoot } from 'react-dom/client';
+
+declare const gsap: any;
+
+// --- DATA & CONFIG ---
+
+const servicesSubLinks = [
+  { name: 'Architectural Design', href: 'architectural-design.html', icon: 'fas fa-archway' },
+  { name: 'Interior Design & Fit-Out', href: 'interior-design.html', icon: 'fas fa-couch' },
+  { name: 'Engineering Consultancy', href: 'engineering-consultancy.html', icon: 'fas fa-cogs' },
+  { name: 'Project Management Consultancy', href: 'project-management.html', icon: 'fas fa-tasks' },
+  { name: 'Sustainability & Energy', href: 'sustainability-energy.html', icon: 'fas fa-leaf' },
+  { name: 'Construction Approval', href: 'construction-approval.html', icon: 'fas fa-check-double' },
+];
+
+const navLinks = [
+  { name: 'Home', href: '/index.html' },
+  { name: 'About Us', href: '/about.html' },
+  { name: 'Works/Projects', href: '/works.html' },
+  { name: 'Services', href: '/index.html#our-services', subLinks: servicesSubLinks },
+  { name: 'Blog', href: '/blog.html' },
+  { name: 'Careers', href: '/careers.html' },
+  { name: 'Contact', href: '/contact.html' },
+];
+
+const blogPosts = [
+    { 
+      image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop&q=60", 
+      category: "Technology", 
+      date: "August 15, 2024", 
+      title: "The Future of BIM: AI and Generative Design",
+      description: "A detailed look into how Building Information Modeling is evolving with artificial intelligence. We explore generative design algorithms that optimize for space, materials, and energy efficiency, paving the way for smarter, more sustainable construction practices. This article discusses the practical applications and future potential of AI in architecture."
+    },
+    { 
+      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&auto=format&fit=crop&q=60", 
+      category: "Architecture", 
+      date: "August 10, 2024", 
+      title: "Sustainable Materials in Modern Construction",
+      description: "This post explores the latest trends in eco-friendly building materials. From bamboo and reclaimed wood to innovative composites and green concrete, we examine the benefits, challenges, and applications of these materials in creating sustainable and resilient structures that reduce environmental impact without compromising on design."
+    },
+    { 
+      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=60", 
+      category: "Interior Design", 
+      date: "August 05, 2024", 
+      title: "Minimalism and Light: Crafting Serene Spaces",
+      description: "Discover the principles of minimalist interior design and the crucial role of natural and artificial light. This article provides insights into creating calm, uncluttered, and functional spaces that promote well-being. We'll look at case studies that masterfully use light to enhance texture, define space, and evoke a sense of tranquility."
+    }
+];
+
+// --- SHARED & LAYOUT COMPONENTS ---
+
+const SkipToContentLink = () => (
+    <a href="#main-content" className="skip-to-content-link">
+        Skip to main content
+    </a>
+);
+
+const AppLink = React.forwardRef<HTMLAnchorElement, {
+  href: string;
+  className?: string;
+  children: React.ReactNode;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
+  [key: string]: any;
+}>(({ href, className = '', children, onClick, ...props }, ref) => {
+    const isToggle = href === '#';
+
+    const handleClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
+        if (isToggle) {
+            e.preventDefault();
+        }
+        if (onClick) {
+            onClick(e);
+        }
+    };
+
+    return (
+        <a ref={ref} href={href} className={className} onClick={onClick ? handleClick : undefined} {...props}>
+            {children}
+        </a>
+    );
+});
+
+
+const MobileNav = ({ isOpen, onClose }) => {
+    const [isServicesOpen, setIsServicesOpen] = useState(false);
+    const navContainerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+            const focusableElements = navContainerRef.current?.querySelectorAll<HTMLElement>(
+                'a[href], button, [tabindex]:not([tabindex="-1"])'
+            );
+            if (!focusableElements || focusableElements.length === 0) return;
+
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            setTimeout(() => firstElement.focus(), 100);
+
+            const handleKeyDown = (e: KeyboardEvent) => {
+                if (e.key === 'Escape') { onClose(); return; }
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) { 
+                        if (document.activeElement === firstElement) { lastElement.focus(); e.preventDefault(); }
+                    } else { 
+                        if (document.activeElement === lastElement) { firstElement.focus(); e.preventDefault(); }
+                    }
+                }
+            };
+            
+            const container = navContainerRef.current;
+            container?.addEventListener('keydown', handleKeyDown);
+            return () => container?.removeEventListener('keydown', handleKeyDown);
+
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => { document.body.style.overflow = ''; };
+    }, [isOpen, onClose]);
+
+    const handleServicesToggle = () => {
+        setIsServicesOpen(prev => !prev);
+    }
+    
+    return (
+        <div ref={navContainerRef} className={`mobile-nav-overlay ${isOpen ? 'open' : ''}`} role="dialog" aria-modal="true" aria-hidden={!isOpen} id="mobile-nav">
+            <nav className="mobile-nav">
+                <ul>
+                    {navLinks.map(link => (
+                         <li key={link.name}>
+                             <AppLink 
+                                href={link.subLinks ? '#' : link.href}
+                                onClick={link.subLinks ? handleServicesToggle : () => onClose()}
+                                aria-haspopup={!!link.subLinks}
+                                aria-expanded={link.subLinks ? isServicesOpen : undefined}
+                                aria-controls={link.subLinks ? `mobile-${link.name}-submenu` : undefined}
+                                id={link.subLinks ? `mobile-${link.name}-toggle` : undefined}
+                             >
+                                 {link.name}
+                                 {link.subLinks && <i className={`fas fa-chevron-down dropdown-indicator ${isServicesOpen ? 'open' : ''}`} aria-hidden="true"></i>}
+                             </AppLink>
+                             {link.subLinks && (
+                                 <ul id={`mobile-${link.name}-submenu`} className={`mobile-submenu ${isServicesOpen ? 'open' : ''}`} aria-hidden={!isServicesOpen}>
+                                     {link.subLinks.map(subLink => (
+                                         <li key={subLink.name}>
+                                            <AppLink href={subLink.href} onClick={() => onClose()}>
+                                                {subLink.name}
+                                            </AppLink>
+                                        </li>
+                                     ))}
+                                 </ul>
+                             )}
+                         </li>
+                    ))}
+                </ul>
+            </nav>
+        </div>
+    );
+};
+
+const Header = ({ theme }) => {
+  const [scrolled, setScrolled] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  
+  const burgerMenuRef = useRef<HTMLButtonElement>(null);
+  const servicesToggleRef = useRef<HTMLAnchorElement>(null);
+  const servicesDropdownContainerRef = useRef<HTMLLIElement>(null);
+
+  const toggleMobileNav = () => { setIsMobileNavOpen(prev => !prev); };
+  const closeMobileNav = () => { setIsMobileNavOpen(false); burgerMenuRef.current?.focus(); };
+
+  const closeServicesDropdown = (shouldFocusToggle = true) => {
+    if (isServicesDropdownOpen) {
+      setIsServicesDropdownOpen(false);
+      if (shouldFocusToggle) { servicesToggleRef.current?.focus(); }
+    }
+  };
+
+  useEffect(() => {
+    if (isServicesDropdownOpen) {
+      const firstItem = servicesDropdownContainerRef.current?.querySelector<HTMLAnchorElement>('.dropdown-menu a');
+      firstItem?.focus();
+    }
+  }, [isServicesDropdownOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => { if (e.key === 'Escape') { closeServicesDropdown(); } };
+    const handleClickOutside = (event: MouseEvent) => {
+      if (servicesDropdownContainerRef.current && !servicesDropdownContainerRef.current.contains(event.target as Node)) {
+        closeServicesDropdown(false);
+      }
+    };
+
+    if (isServicesDropdownOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isServicesDropdownOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleServicesClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsServicesDropdownOpen(prev => !prev);
+  };
+  
+  const handleDropdownItemKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+    const items = Array.from(
+      servicesDropdownContainerRef.current?.querySelectorAll<HTMLAnchorElement>('.dropdown-link-item') || []
+    );
+    const currentIndex = items.indexOf(e.currentTarget);
+
+    if (e.key === 'ArrowDown') { e.preventDefault(); items[(currentIndex + 1) % items.length]?.focus(); } 
+    else if (e.key === 'ArrowUp') { e.preventDefault(); items[(currentIndex - 1 + items.length) % items.length]?.focus(); } 
+    else if (e.key === 'Tab' && !e.shiftKey && currentIndex === items.length - 1) { closeServicesDropdown(false); } 
+    else if (e.key === 'Tab' && e.shiftKey && currentIndex === 0) { closeServicesDropdown(false); }
+  };
+
+  const headerClasses = `app-header ${scrolled ? 'scrolled' : ''} on-${theme}`;
+
+  return (
+    <header className={headerClasses}>
+      <div className="logo">
+        <AppLink href="/index.html">
+          <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1762341232/DESign_220_x_60_px_abhv5e.png" alt="Taj Design Consultancy Logo" className="logo-image" />
+        </AppLink>
+      </div>
+      <nav className="main-nav" aria-label="Main navigation">
+        <ul>
+          {navLinks.map((link) => (
+            <li 
+              key={link.name} 
+              className={`${link.subLinks ? 'has-dropdown' : ''} ${link.name === 'Services' && isServicesDropdownOpen ? 'open' : ''}`}
+              ref={link.name === 'Services' ? servicesDropdownContainerRef : null}
+            >
+              <AppLink 
+                ref={link.name === 'Services' ? servicesToggleRef : null}
+                href={link.href}
+                id={link.name === 'Services' ? 'services-menu-toggle' : undefined}
+                onClick={link.name === 'Services' ? handleServicesClick : undefined}
+                aria-haspopup={!!link.subLinks}
+                aria-expanded={link.name === 'Services' ? isServicesDropdownOpen : undefined}
+                aria-controls={link.name === 'Services' ? 'services-dropdown-menu' : undefined}
+              >
+                {link.name}
+                {link.subLinks && <i className="fas fa-chevron-down dropdown-indicator" aria-hidden="true"></i>}
+              </AppLink>
+              {link.subLinks && (
+                <div id="services-dropdown-menu" className="dropdown-menu" role="menu" aria-labelledby="services-menu-toggle">
+                  <ul className="dropdown-links" role="none">
+                      {link.subLinks.map((subLink, index) => (
+                          <li role="presentation" key={subLink.name}>
+                              <AppLink href={subLink.href} role="menuitem" onKeyDown={handleDropdownItemKeyDown} className="dropdown-link-item" onClick={() => setIsServicesDropdownOpen(false)} style={{ '--delay': `${index * 0.05}s` } as React.CSSProperties}>
+                                  <i className={`${subLink.icon} dropdown-link-icon`} aria-hidden="true"></i>
+                                  <span>{subLink.name}</span>
+                              </AppLink>
+                          </li>
+                      ))}
+                  </ul>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <button ref={burgerMenuRef} className={`burger-menu ${isMobileNavOpen ? 'open' : ''}`} onClick={toggleMobileNav} aria-label={isMobileNavOpen ? "Close navigation menu" : "Open navigation menu"} aria-controls="mobile-nav" aria-expanded={isMobileNavOpen}>
+        <span className="burger-bar"></span><span className="burger-bar"></span><span className="burger-bar"></span>
+      </button>
+      <MobileNav isOpen={isMobileNavOpen} onClose={closeMobileNav} />
+    </header>
+  );
+};
+
+const LeftSidebar = ({ pageName }) => {
+  return (
+    <aside className="left-sidebar">
+      <div className="sidebar-top">
+        <div className="divider" />
+        <div className="home-text">{pageName}</div>
+      </div>
+      <div className="social-icons">
+        <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f" aria-hidden="true"></i></a>
+        <a href="#" aria-label="Twitter"><i className="fab fa-twitter" aria-hidden="true"></i></a>
+        <a href="#" aria-label="Instagram"><i className="fab fa-instagram" aria-hidden="true"></i></a>
+        <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin-in" aria-hidden="true"></i></a>
+      </div>
+      <div className="sidebar-footer">
+        <p>© Taj Design Consult 2024</p>
+      </div>
+    </aside>
+  );
+};
+
+const WaveAnimation = memo(() => {
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        let animationFrameId: number;
+        const waves = [ { amp: 15, freq: 0.02, phase: 0, color: 'rgba(212, 175, 55, 0.2)', speed: 0.01 }, { amp: 20, freq: 0.015, phase: 1, color: 'rgba(212, 175, 55, 0.3)', speed: 0.015 }, { amp: 25, freq: 0.01, phase: 2, color: 'rgba(212, 175, 55, 0.4)', speed: 0.02 }, ];
+        const resizeCanvas = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
+        const draw = () => {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            waves.forEach(wave => {
+                wave.phase += wave.speed; ctx.beginPath(); ctx.moveTo(0, canvas.height);
+                for (let x = 0; x < canvas.width; x++) { const y = Math.sin(x * wave.freq + wave.phase) * wave.amp + (canvas.height / 1.5); ctx.lineTo(x, y); }
+                ctx.lineTo(canvas.width, canvas.height); ctx.closePath(); ctx.fillStyle = wave.color; ctx.fill();
+            });
+            animationFrameId = requestAnimationFrame(draw);
+        };
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        draw();
+        return () => { window.removeEventListener('resize', resizeCanvas); cancelAnimationFrame(animationFrameId); };
+    }, []);
+    return <canvas ref={canvasRef} id="footer-wave-canvas" aria-hidden="true" />;
+});
+
+const Footer = () => {
+    const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    return (
+        <footer id="footer" className="app-footer">
+            <WaveAnimation />
+            <div className="container">
+                <div className="copyright-section">
+                    <span>2024 © Taj Design Consult. All rights reserved.</span>
+                    <button className="to-top" onClick={scrollToTop} aria-label="Scroll back to top">To Top ↑</button>
+                </div>
+            </div>
+          </footer>
+    )
+}
+
+const WhatsAppChatWidget = () => (
+    <a href="https://wa.me/97477123400" className="whatsapp-widget" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+        <div className="whatsapp-ring"></div><div className="whatsapp-ring-delay"></div>
+        <i className="fab fa-whatsapp whatsapp-icon" aria-hidden="true"></i>
+    </a>
+);
+
+const BlogModal = ({ post, onClose }) => {
+    const modalRef = useRef<HTMLDivElement>(null);
+    const lastFocusedElement = useRef<HTMLElement | null>(null);
+
+    useEffect(() => {
+        if (post) {
+            lastFocusedElement.current = document.activeElement as HTMLElement;
+            setTimeout(() => modalRef.current?.focus(), 100);
+
+            const handleKeyDown = (e: KeyboardEvent) => {
+                if (e.key === 'Escape') onClose();
+                else if (e.key === 'Tab') {
+                     const focusableElements = modalRef.current?.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                    if (!focusableElements || focusableElements.length === 0) return;
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+                    if (e.shiftKey) { if (document.activeElement === firstElement) { lastElement.focus(); e.preventDefault(); }}
+                    else { if (document.activeElement === lastElement) { firstElement.focus(); e.preventDefault(); }}
+                }
+            };
+
+            document.addEventListener('keydown', handleKeyDown);
+            return () => { 
+                document.removeEventListener('keydown', handleKeyDown);
+                lastFocusedElement.current?.focus();
+            };
+        }
+    }, [post, onClose]);
+
+    if (!post) return null;
+
+    return (
+        <div className="project-modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="blog-modal-title">
+            <div ref={modalRef} className="project-modal-content blog-modal-content" onClick={e => e.stopPropagation()} tabIndex={-1}>
+                <button onClick={onClose} className="project-modal-close" aria-label="Close blog post">&times;</button>
+                <div className="blog-modal-image">
+                    <img src={post.image} alt={post.title} />
+                </div>
+                <div className="project-modal-details blog-modal-details">
+                    <p className="modal-meta">{post.category} / {post.date}</p>
+                    <h3 id="blog-modal-title" className="modal-title">{post.title}</h3>
+                    <p className="modal-description">{post.description}</p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
+const BlogPage = () => {
+    const [selectedPost, setSelectedPost] = useState(null);
+
+    return (
+        <>
+            <BlogModal post={selectedPost} onClose={() => setSelectedPost(null)} />
+            <section className="blog-hero-section">
+                <h1>From The <strong>Blog</strong></h1>
+            </section>
+            <section id="blog-grid-section" className="blog-list-section">
+                <div className="container">
+                    <div className="blog-grid">
+                        {blogPosts.map((post, index) => (
+                            <button className="blog-item" key={index} onClick={() => setSelectedPost(post)} aria-label={`Read more about ${post.title}`}>
+                                <div className="blog-item-image" style={{backgroundImage: `url(${post.image})`}} aria-hidden="true" />
+                                <div className="blog-item-content">
+                                    <p className="blog-item-meta">{post.category} / {post.date}</p>
+                                    <h3 className="blog-item-title">{post.title}</h3>
+                                    <span className="blog-item-link">Read Full Article <i className="fas fa-arrow-right" aria-hidden="true"></i></span>
+                                </div>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        </>
+    );
+}
+
+const App = () => {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 200);
+        return () => clearTimeout(timer);
+    }, []);
+
+    return (
+        <div className={`app ${loading ? 'loading' : ''}`}>
+            <SkipToContentLink />
+            <WhatsAppChatWidget />
+            <Header theme="dark" />
+            <div className="main-container">
+                <LeftSidebar pageName="BLOG" />
+                <main className="main-content" id="main-content" tabIndex={-1}>
+                    <BlogPage />
+                    <Footer />
+                </main>
+            </div>
+        </div>
+    );
+};
+
+const container = document.getElementById('root');
+if (container) {
+    const root = createRoot(container);
+    root.render(<App />);
+}
