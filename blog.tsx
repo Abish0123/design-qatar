@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useRef, memo, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -28,6 +27,38 @@ const navLinks = [
 
 const blogPosts = [
     { 
+      slug: "interior-design-trends-qatar-2025",
+      image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=800&auto=format&fit=crop&q=60",
+      category: "Interior Design", 
+      date: "December 03, 2024", 
+      title: "Key Trends in Interior Design for Qatar's Commercial and Residential Spaces",
+      description: "A research-backed overview of the top trends shaping residential and commercial interiors in Qatar for 2025, from biophilic design to smart technology."
+    },
+    { 
+      slug: "bim-digital-innovation-qatar",
+      image: "https://images.unsplash.com/photo-1606768666853-403c90a981ad?w=800&auto=format&fit=crop&q=60",
+      category: "Digital Innovation", 
+      date: "November 26, 2024", 
+      title: "The Role of BIM and Digital Innovation in Transforming Architectural and Engineering Consultancy",
+      description: "BIM has emerged as a game-changer, fostering a new era of precision and integrated project delivery in Qatar and across the Middle East."
+    },
+    { 
+      slug: "securing-construction-approvals-qatar",
+      image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&auto=format&fit=crop&q=60",
+      category: "Approvals", 
+      date: "November 19, 2024", 
+      title: "Securing Construction Approvals in Qatar: A Practical Guide for Developers",
+      description: "Understanding the path from concept to completion, navigating regulations, preparing documentation, and ensuring a smooth journey from vision to reality."
+    },
+    { 
+      slug: "sustainable-design-middle-east",
+      image: "https://images.unsplash.com/photo-1558992093-dba0d78ac498?w=800&auto=format&fit=crop&q=60", 
+      category: "Sustainability", 
+      date: "November 12, 2024", 
+      title: "Sustainable Design: Integrating Green Practices in Modern Middle Eastern Construction",
+      description: "Exploring the necessity of green practices in the Middle East's construction landscape, from materials to passive design strategies."
+    },
+    { 
       slug: "sustainable-renovation-qatar",
       image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&auto=format&fit=crop&q=60", 
       category: "Sustainability", 
@@ -36,20 +67,12 @@ const blogPosts = [
       description: "As Qatar pursues its National Vision 2030, sustainable renovation and digital transformation have moved from trend to necessity, creating smarter, greener, and more resilient spaces."
     },
     { 
-      slug: "the-future-of-bim",
-      image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop&q=60", 
-      category: "Technology", 
-      date: "August 15, 2024", 
-      title: "The Future of BIM: AI and Generative Design",
-      description: "A detailed look into how Building Information Modeling is evolving with artificial intelligence, paving the way for smarter construction."
-    },
-    { 
-      slug: "minimalism-and-light",
-      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=60", 
-      category: "Interior Design", 
-      date: "August 05, 2024", 
-      title: "Minimalism and Light: Crafting Serene Spaces",
-      description: "Discover the principles of minimalist interior design and the crucial role of light in creating calm, uncluttered, and functional spaces."
+      slug: "architectural-innovation-qatar",
+      image: "https://images.unsplash.com/photo-1594434533431-597a18855497?w=800&auto=format&fit=crop&q=60",
+      category: "Architecture",
+      date: "October 28, 2024",
+      title: "How Architectural Innovation is Shaping Qatar's Urban Future",
+      description: "A look at how forward-thinking architecture and engineering are blending creativity, technical excellence, and sustainability to craft Qatar's future."
     }
 ];
 
@@ -262,17 +285,14 @@ const Header = ({ theme }) => {
                 {link.subLinks && <i className="fas fa-chevron-down dropdown-indicator" aria-hidden="true"></i>}
               </AppLink>
               {link.subLinks && (
-                <div id="services-dropdown-menu" className="dropdown-menu" role="menu" aria-labelledby="services-menu-toggle">
-                  <ul className="dropdown-links" role="none">
-                      {link.subLinks.map((subLink, index) => (
+                <div id="services-dropdown-menu" className="dropdown-menu" role="menu" aria-labelledby="services-menu-toggle"><ul className="dropdown-links" role="none">{link.subLinks.map((subLink, index) => (
                           <li role="presentation" key={subLink.name}>
                               <AppLink href={subLink.href} role="menuitem" onKeyDown={handleDropdownItemKeyDown} className="dropdown-link-item" onClick={() => setIsServicesDropdownOpen(false)} style={{ '--delay': `${index * 0.05}s` } as React.CSSProperties}>
                                   <i className={`${subLink.icon} dropdown-link-icon`} aria-hidden="true"></i>
                                   <span>{subLink.name}</span>
                               </AppLink>
                           </li>
-                      ))}
-                  </ul>
+                      ))}</ul>
                 </div>
               )}
             </li>
@@ -310,23 +330,12 @@ const LeftSidebar = ({ pageName }) => {
 const WaveAnimation = memo(() => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
+        const canvas = canvasRef.current; if (!canvas) return;
+        const ctx = canvas.getContext('2d'); if (!ctx) return;
         let animationFrameId: number;
         const waves = [ { amp: 15, freq: 0.02, phase: 0, color: 'rgba(212, 175, 55, 0.2)', speed: 0.01 }, { amp: 20, freq: 0.015, phase: 1, color: 'rgba(212, 175, 55, 0.3)', speed: 0.015 }, { amp: 25, freq: 0.01, phase: 2, color: 'rgba(212, 175, 55, 0.4)', speed: 0.02 }, ];
         const resizeCanvas = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
-        const draw = () => {
-            if (!ctx) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            waves.forEach(wave => {
-                wave.phase += wave.speed; ctx.beginPath(); ctx.moveTo(0, canvas.height);
-                for (let x = 0; x < canvas.width; x++) { const y = Math.sin(x * wave.freq + wave.phase) * wave.amp + (canvas.height / 1.5); ctx.lineTo(x, y); }
-                ctx.lineTo(canvas.width, canvas.height); ctx.closePath(); ctx.fillStyle = wave.color; ctx.fill();
-            });
-            animationFrameId = requestAnimationFrame(draw);
-        };
+        const draw = () => { if (!ctx) return; ctx.clearRect(0, 0, canvas.width, canvas.height); waves.forEach(wave => { wave.phase += wave.speed; ctx.beginPath(); ctx.moveTo(0, canvas.height); for (let x = 0; x < canvas.width; x++) { const y = Math.sin(x * wave.freq + wave.phase) * wave.amp + (canvas.height / 1.5); ctx.lineTo(x, y); } ctx.lineTo(canvas.width, canvas.height); ctx.closePath(); ctx.fillStyle = wave.color; ctx.fill(); }); animationFrameId = requestAnimationFrame(draw); };
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
         draw();
