@@ -1,3 +1,4 @@
+
 :root {
   --dark-bg: #111111;
   --dark-bg-secondary: #1c1c1c;
@@ -237,7 +238,7 @@ html, body {
 
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 30px;
 }
 
@@ -255,15 +256,21 @@ html, body {
     cursor: pointer;
     width: 100%;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
 }
 .blog-item-image {
     height: 220px;
     background-size: cover;
     background-position: center;
     transition: transform 0.4s ease-out;
+    flex-shrink: 0;
 }
 .blog-item-content {
     padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 .blog-item-meta {
     font-size: 12px;
@@ -276,6 +283,7 @@ html, body {
     font-weight: 700;
     margin-bottom: 15px;
     color: var(--text-dark);
+    flex-grow: 1;
 }
 .blog-item-link {
     display: inline-block;
@@ -283,6 +291,7 @@ html, body {
     text-decoration: none;
     font-weight: 700;
     font-size: 14px;
+    margin-top: auto;
 }
 .blog-item-link i { margin-left: 5px; transition: transform 0.3s ease; }
 
@@ -380,7 +389,6 @@ html, body {
     .project-modal-content { grid-template-rows: 250px auto; }
 }
 @media (max-width: 576px) {
-    .blog-grid { grid-template-columns: 1fr; }
     .project-modal-content { grid-template-rows: 200px auto; }
 }
 @media (max-width: 480px) {
