@@ -74,7 +74,7 @@ const workItems = [
       alt: 'Architectural redesign of the Al Jabor commercial building in Al Hilal, Qatar.'
     },
     {
-      title: 'Legal office for Shaiek Jassim Al Thani',
+      title: 'Legal office for Sheikh Jassim Al Thani',
       meta: 'End-to-end interior design and fit-out supervision',
       location: 'Westbay',
       description: 'Interior design and supervision for turnkey fit-out works—covering concept to handover—with full life-safety compliance to QCDD/NFPA codes. Services include 3D renders and visualizations, coordinated MEP layouts, furniture and finishes selection, technical specifications, detailed BOQs, and on-site supervision/QA to ensure quality, budget control, and timely delivery.',
