@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useRef, memo, createContext, useContext, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -1040,25 +1041,25 @@ const HomePage = () => {
 
   const blogPosts = [
     { 
+      slug: "sustainable-renovation-qatar",
+      image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&auto=format&fit=crop&q=60", 
+      category: "Sustainability", 
+      date: "November 05, 2024", 
+      title: "Building for the Future: Sustainable Renovation in Qatar",
+    },
+    { 
+      slug: "the-future-of-bim",
       image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop&q=60", 
       category: "Technology", 
       date: "August 15, 2024", 
       title: "The Future of BIM: AI and Generative Design",
-      description: "A detailed look into how Building Information Modeling is evolving with artificial intelligence. We explore generative design algorithms that optimize for space, materials, and energy efficiency, paving the way for smarter, more sustainable construction practices. This article discusses the practical applications and future potential of AI in architecture."
     },
     { 
-      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&auto=format&fit=crop&q=60", 
-      category: "Architecture", 
-      date: "August 10, 2024", 
-      title: "Sustainable Materials in Modern Construction",
-      description: "This post explores the latest trends in eco-friendly building materials. From bamboo and reclaimed wood to innovative composites and green concrete, we examine the benefits, challenges, and applications of these materials in creating sustainable and resilient structures that reduce environmental impact without compromising on design."
-    },
-    { 
+      slug: "minimalism-and-light",
       image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=60", 
       category: "Interior Design", 
       date: "August 05, 2024", 
       title: "Minimalism and Light: Crafting Serene Spaces",
-      description: "Discover the principles of minimalist interior design and the crucial role of natural and artificial light. This article provides insights into creating calm, uncluttered, and functional spaces that promote well-being. We'll look at case studies that masterfully use light to enhance texture, define space, and evoke a sense of tranquility."
     }
   ];
 
@@ -1295,7 +1296,7 @@ const HomePage = () => {
           <h2 className="section-title scroll-trigger fade-up" style={{ textAlign: 'center' }}>From <strong>The Blog</strong></h2>
           <div className="blog-grid">
             {blogPosts.map((post, index) => (
-                <a href="/blog.html" className="blog-item scroll-trigger fade-up" key={index} style={{ transitionDelay: `${index * 0.1}s` }} aria-label={`Read more about ${post.title}`}>
+                <a href={`/blog-post.html?post=${post.slug}`} className="blog-item scroll-trigger fade-up" key={index} style={{ transitionDelay: `${index * 0.1}s` }} aria-label={`Read more about ${post.title}`}>
                     <div className="blog-item-image" style={{backgroundImage: `url(${post.image})`}} aria-hidden="true" />
                     <div className="blog-item-content">
                         <p className="blog-item-meta">{post.category} / {post.date}</p>
