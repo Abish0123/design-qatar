@@ -83,7 +83,7 @@ const blogPosts = [
             "Simulate building performance, allowing for optimization of energy use, sunlight, and airflow",
             "Generate detailed schedules and cost estimates, increasing transparency for clients"
         ]},
-        { type: 'image', src: 'https://i.imgur.com/8T4f2sN.jpeg', captionTitle: 'Shared Digital Environment', captionText: 'BIM brings all project stakeholders and information into a unified digital model, enhancing collaboration.' },
+        { type: 'image', src: 'https://www.akbconsultants.com/blog/wp-content/uploads/2021/05/structural-engineering-consultants.jpg', captionTitle: 'Shared Digital Environment', captionText: 'BIM brings all project stakeholders and information into a unified digital model, enhancing collaboration.' },
         { type: 'heading', text: "Enhancing Collaboration and Reducing Risk" },
         { type: 'paragraph', text: "One of the most significant benefits of BIM is its ability to minimize miscommunication and duplication of work. All parties, architects, structural engineers, mechanical teams, and contractors, work from the same digital model, ensuring consistency and clarity throughout the project's lifecycle. This not only saves time but helps projects stay on schedule and within budget." },
         { type: 'heading', text: "Driving Sustainable and Efficient Design" },
