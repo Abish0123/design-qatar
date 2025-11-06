@@ -44,7 +44,7 @@ const blogPosts = [
     },
     { 
       slug: "securing-construction-approvals-qatar",
-      image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&auto=format&fit=crop&q=60",
+      image: "https://t3.ftcdn.net/jpg/17/65/93/08/360_F_1765930816_YCsRuO4iDyC6LJcU4B8LuNcjEy5J3yLk.jpg",
       category: "Approvals", 
       date: "November 19, 2024", 
       title: "Securing Construction Approvals in Qatar: A Practical Guide for Developers",
@@ -72,7 +72,7 @@ const blogPosts = [
       category: "Architecture",
       date: "October 28, 2024",
       title: "How Architectural Innovation is Shaping Qatar's Urban Future",
-      description: "A look at how forward-thinking architecture and engineering are blending creativity, technical excellence, and sustainability to craft Qatar's future."
+      description: "A look at how forward-thinking architecture and engineering are blending creativity, technical excellence, and sustainability to craft the country's future."
     }
 ];
 
