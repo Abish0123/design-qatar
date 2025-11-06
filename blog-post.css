@@ -216,7 +216,7 @@ html, body { font-family: var(--sans-font); color: var(--text-dark); scroll-beha
 }
 
 .blog-article ul li::before {
-    content: '\\f058'; /* Font Awesome check-circle solid */
+    content: '\f058'; /* Font Awesome check-circle solid */
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     position: absolute;
