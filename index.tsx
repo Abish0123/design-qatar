@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useRef, memo, createContext, useContext, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -1042,7 +1041,7 @@ const HomePage = () => {
   const blogPosts = [
     { 
       slug: "sustainable-design-middle-east",
-      image: "https://images.unsplash.com/photo-1558992093-dba0d78ac498?w=800&auto=format&fit=crop&q=60", 
+      image: "https://constructive-voices.com/wp-content/uploads/2024/02/Saudi-Arabia-Top-Green-Buildings.jpg", 
       category: "Sustainability", 
       date: "November 12, 2024", 
       title: "Sustainable Design: Integrating Green Practices in Modern Middle Eastern Construction",
@@ -1056,7 +1055,7 @@ const HomePage = () => {
     },
     { 
       slug: "architectural-innovation-qatar",
-      image: "https://images.unsplash.com/photo-1594434533431-597a18855497?w=800&auto=format&fit=crop&q=60",
+      image: "https://worldarchitecture.org/cdnimgfiles/extuploadc/347.jpg",
       category: "Architecture",
       date: "October 28, 2024",
       title: "How Architectural Innovation is Shaping Qatar's Urban Future",
