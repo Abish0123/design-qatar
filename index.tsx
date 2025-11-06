@@ -1041,6 +1041,13 @@ const HomePage = () => {
 
   const blogPosts = [
     { 
+      slug: "sustainable-design-middle-east",
+      image: "https://images.unsplash.com/photo-1558992093-dba0d78ac498?w=800&auto=format&fit=crop&q=60", 
+      category: "Sustainability", 
+      date: "November 12, 2024", 
+      title: "Sustainable Design: Integrating Green Practices in Modern Middle Eastern Construction",
+    },
+    { 
       slug: "sustainable-renovation-qatar",
       image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&auto=format&fit=crop&q=60", 
       category: "Sustainability", 
@@ -1048,18 +1055,11 @@ const HomePage = () => {
       title: "Building for the Future: Sustainable Renovation in Qatar",
     },
     { 
-      slug: "the-future-of-bim",
-      image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop&q=60", 
-      category: "Technology", 
-      date: "August 15, 2024", 
-      title: "The Future of BIM: AI and Generative Design",
-    },
-    { 
-      slug: "minimalism-and-light",
-      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=60", 
-      category: "Interior Design", 
-      date: "August 05, 2024", 
-      title: "Minimalism and Light: Crafting Serene Spaces",
+      slug: "architectural-innovation-qatar",
+      image: "https://images.unsplash.com/photo-1594434533431-597a18855497?w=800&auto=format&fit=crop&q=60",
+      category: "Architecture",
+      date: "October 28, 2024",
+      title: "How Architectural Innovation is Shaping Qatar's Urban Future",
     }
   ];
 
