@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useRef, memo, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -27,12 +28,12 @@ const navLinks = [
 
 const blogPosts = [
     { 
-      slug: "crafting-tomorrow-sustainable-living",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=60", 
+      slug: "sustainable-renovation-qatar",
+      image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&auto=format&fit=crop&q=60", 
       category: "Sustainability", 
-      date: "October 24, 2024", 
-      title: "Crafting Tomorrow: Sustainable Living in Residential Architecture",
-      description: "Explore the fundamental principles and innovative strategies behind creating eco-friendly homes for a greener future."
+      date: "November 05, 2024", 
+      title: "Building for the Future: Sustainable Renovation in Qatar",
+      description: "As Qatar pursues its National Vision 2030, sustainable renovation and digital transformation have moved from trend to necessity, creating smarter, greener, and more resilient spaces."
     },
     { 
       slug: "the-future-of-bim",
