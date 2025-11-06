@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useRef, memo, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -27,18 +28,39 @@ const navLinks = [
 
 const blogPosts = [
     { 
-      slug: "crafting-tomorrow-sustainable-living",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&auto=format&fit=crop&q=60", 
+      slug: "sustainable-renovation-qatar",
+      image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=1600&auto=format&fit=crop&q=60", 
       category: "Sustainability", 
-      author: "Jane Doe",
-      date: "October 24, 2024", 
-      title: "Crafting Tomorrow: Sustainable Living in Residential Architecture",
-      subtitle: "Explore the fundamental principles and innovative strategies behind creating eco-friendly homes for a greener future.",
+      author: "Taj Design Experts",
+      date: "November 05, 2024", 
+      title: "Building for the Future: Sustainable Renovation and Digital Transformation in Qatar's Construction Sector",
+      subtitle: "As Qatar pursues its National Vision 2030, sustainable renovation and digital transformation have moved from trend to necessity, creating smarter, greener, and more resilient spaces.",
       content: [
-        { type: 'paragraph', text: 'Ton,thot,tutts d ann just inf pratice. Tunt de lremoment ad. Cerinsl ercurd tinfimtrk ofilm. The willme to priumne met varim; firal aret btud smimfoe perseily piaste, the henil ltu so intf,nkn he thet timtr asethit elerinsled outsonpest of nkoe elitmlin in ulupotmt lo thestulcr or ecseuvral mlmne iudipisest.' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop&q=60', captionTitle: 'Harmonious Pendulum: Timeless Design', captionText: 'It tn rnsentic imuria mscrovuh ei stntegiTa stang rnunrn ultids am unchtlaam uturis shreomeli thurois.' },
-        { type: 'paragraph', text: 'Architecture lestoujots uiener abomale tnoila lcutigst lrvnbs ttaune hoionnmg. Ytustlet-n unad lne ronepnod, iur ko emnn stall qprisssel grocitrion sinoitems, tiest-s anm ebtimgx flat npeitutnlor oell lunee fan n lma uaremof lesri sterind.' },
-        { type: 'blockquote', text: 'Architecture is the just tx un adidinge with then.fues vulfi srken is licseui le ro its upicoon of tesign nt kco enr opest cottinge, the the andat liegats.' },
+        { type: 'paragraph', text: "Qatar's construction industry stands at a critical crossroads, balancing ambitious new developments with the urgent need to modernize and upgrade existing properties. As the country pursues its National Vision 2030, sustainable renovation and digital transformation have moved from trend to necessity. Consultancies like Taj Design Consultancy play an important role, supporting clients in their journey towards creating smarter, greener, and more resilient spaces." },
+        { type: 'heading', text: 'Sustainable Renovation: Upgrading with Purpose' },
+        { type: 'paragraph', text: "Renovating older buildings is no longer just about aesthetics; it's about driving energy performance, occupant comfort, and long-term value." },
+        { type: 'list', items: [
+            "Energy-efficient retrofits: From high-performance glazing and advanced insulation to LED lighting and HVAC upgrades, reducing energy consumption is a top priority.",
+            "Water-saving technologies: Smart plumbing fixtures and integrated rainwater harvesting systems help address water scarcity and cut utilities costs.",
+            "Indoor environmental quality: Use of low-VOC materials, improved air filtration, and natural daylighting contribute to healthier spaces for residents and staff.",
+            "Heritage preservation: Strategically chosen eco-upgrades can refresh existing structures while honoring Qatar's architectural history."
+        ]},
+        { type: 'image', src: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800&auto=format&fit=crop&q=60', captionTitle: 'Modern sustainable interior', captionText: 'A blend of natural materials and greenery enhances indoor environmental quality.' },
+        { type: 'heading', text: 'Digital Transformation: Enhancing Every Phase' },
+        { type: 'paragraph', text: "Modern renovation projects are powered by digital tools that add transparency, reduce risk, and improve collaboration." },
+        { type: 'list', items: [
+            "Building Information Modeling (BIM): Digital models allow for precise planning, clash detection, and virtual walkthroughs before construction begins, meaning fewer surprises and faster delivery.",
+            "Project management platforms: Real-time updates keep stakeholders informed and aligned. Budget tracking, process automation, and document management make projects more predictable and efficient.",
+            "Smart building systems: Integration of IoT sensors, automated climate controls, and intelligent security boosts building safety and performance post-renovation."
+        ]},
+        { type: 'heading', text: 'Real-World Impact: Success Stories in Qatar'},
+        { type: 'paragraph', text: 'Leading offices, hotels, and schools in Doha have already benefited from sustainable renovation. For example:'},
+        { type: 'list', items: [
+            "A business center that retrofitted its façade and HVAC, reducing energy bills by 30%.",
+            "A luxury villa upgraded its bathrooms and gardens to water-saving fixtures and native landscaping, promoting community-wide conservation.",
+            "Public buildings scheduled for renovation in 2025 are using BIM for pre-construction planning, helping authorities meet new sustainability codes."
+        ]},
+        { type: 'blockquote', text: 'At every stage, Taj Design Consultancy provides tailored guidance, prioritizing both sustainability and digital excellence, ensuring every investment delivers maximum value and lasting positive impact.' }
       ]
     },
     { 
@@ -108,6 +130,14 @@ const BlogPost = ({ post }) => {
                         switch (item.type) {
                             case 'paragraph':
                                 return <p key={index}>{item.text}</p>;
+                            case 'heading':
+                                return <h2 key={index}>{item.text}</h2>;
+                            case 'list':
+                                return (
+                                    <ul key={index}>
+                                        {(item.items as string[]).map((li, i) => <li key={i}>{li}</li>)}
+                                    </ul>
+                                );
                             case 'image':
                                 return (
                                     <div className="inline-image" key={index}>
