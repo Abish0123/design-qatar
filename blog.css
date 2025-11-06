@@ -1,4 +1,3 @@
-
 :root {
   --dark-bg: #111111;
   --dark-bg-secondary: #1c1c1c;
@@ -177,6 +176,7 @@ html, body {
 .logo-image { height: 50px; width: auto; }
 
 .main-nav ul { list-style: none; display: flex; gap: 25px; }
+.main-nav ul li { position: relative; }
 .main-nav a { color: var(--text-light); text-decoration: none; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; font-weight: 400; position: relative; padding-bottom: 5px; transition: color 0.3s ease, text-shadow 0.3s ease; }
 .main-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background-color: var(--accent-color); transition: width 0.3s ease; }
   
