@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useRef, memo, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -27,6 +26,126 @@ const navLinks = [
 ];
 
 const blogPosts = [
+    {
+      slug: "interior-design-trends-qatar-2025",
+      image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=1600&auto=format&fit=crop&q=60",
+      category: "Interior Design",
+      author: "Taj Design Experts",
+      date: "December 03, 2024",
+      title: "Key Trends in Interior Design for Qatar's Commercial and Residential Spaces",
+      subtitle: "A research-backed overview of the top trends shaping residential and commercial interiors in Qatar for 2025, from biophilic design to smart technology and cultural fusion.",
+      content: [
+        { type: 'paragraph', text: "Interior design in Qatar is evolving rapidly, combining luxury, technology, sustainability, and cultural elements to create contemporary spaces that are both functional and visually striking. Here's a research-backed overview of the top trends shaping residential and commercial interiors in Qatar for 2025:" },
+        { type: 'heading', text: "1. Biophilic & Eco-Friendly Design" },
+        { type: 'paragraph', text: "Connection to nature is a major trend, with designers incorporating indoor plants, living walls, water features, and the extensive use of natural materials such as wood, stone, and marble. These elements promote wellness and support Qatar's environmental goals, while also creating calming and refreshing atmospheres for homes and offices alike. Energy-efficient lighting, eco-friendly finishes, and sustainable materials reflect a growing demand for environmental responsibility." },
+        { type: 'heading', text: "2. Cultural Fusion: Modern Meets Heritage" },
+        { type: 'paragraph', text: "Contemporary Qatari interiors often blend minimalism, clean lines, open spaces, and neutral color palettes, with Arabic-inspired motifs, majlis-style lounges, arched features, and rich textiles. This seamless fusion honors local traditions while delivering global sophistication, especially prominent in luxury villas, hospitality, and public spaces." },
+        { type: 'heading', text: "3. Smart and Tech-Integrated Spaces" },
+        { type: 'paragraph', text: "Smart home and office technology is being widely adopted. Automation for lighting, climate control, and security, as well as voice-activated appliances, are standard in new builds. Commercial interiors integrate smart conference rooms and digital wayfinding, ensuring both efficiency and comfort for users." },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&auto=format&fit=crop&q=60', captionTitle: 'Modern & Multifunctional', captionText: 'Adaptable layouts and bespoke touches are defining luxury interiors in Qatar.' },
+        { type: 'heading', text: "4. Adaptable and Multifunctional Layouts" },
+        { type: 'paragraph', text: "Urban living is driving the demand for adaptable interiors, featuring modular furniture, movable dividers, and spaces that can transition easily from work to relaxation. Flexibility is crucial in both residential apartments and commercial offices to maximize space and meet changing needs." },
+        { type: 'heading', text: "5. Wellness-Focused Environments" },
+        { type: 'paragraph', text: "Wellness is central to luxury interiors: think spa-like bathrooms, meditation rooms, acoustic insulation, and ergonomic furnishings. These features support physical and mental health, reflecting the growing recognition of the role interiors play in well-being." },
+        { type: 'heading', text: "6. Statement Lighting & Bold Colors" },
+        { type: 'paragraph', text: "Lighting is more than functional; it's an art form. Dramatic chandeliers, sculptural pendant lights, and LED mood lighting are used to create ambiance and visual interest. Meanwhile, interiors are moving away from only neutrals; deep jewel tones, bold color accents, and maximalism are on the rise in luxury sectors." },
+        { type: 'heading', text: "7. Bespoke & Artisanal Touches" },
+        { type: 'paragraph', text: "Commissioned furniture, handcrafted mosaics, custom artwork, and unique décor pieces make interiors truly personal and memorable. This desire for exclusivity and individuality is growing among Qatar's high-end clientele." },
+        { type: 'heading', text: "8. Open Plan & Seamless Indoor-Outdoor Transitions" },
+        { type: 'paragraph', text: "Large windows, glass partitions, and direct access to terraces or gardens blur the lines between interior and exterior. This trend is especially prominent in villas and luxury developments, capitalizing on Qatar's sunny climate and beautiful views." },
+        { type: 'blockquote', text: "These interior design trends showcase how innovation and cultural identity can coexist beautifully in Qatar's dynamic environments." },
+        { type: 'heading', text: "Key Considerations for Commercial Spaces" },
+        { type: 'list', items: [
+            "Offices focus on open-plan layouts, collaborative zones, and biophilic elements for productivity and comfort.",
+            "Retail and hospitality venues prioritize brand identity, sensory experiences, and operational sustainability.",
+            "Public and educational buildings demand resilient finishes, accessibility, and flexible, multifunctional environments."
+        ]},
+        { type: 'heading', text: "Looking Ahead" },
+        { type: 'paragraph', text: "As Qatar continues to develop, these interior design trends showcase how innovation and cultural identity can coexist beautifully. Whether designing a luxury villa or a state-of-the-art office, Taj Design Consultancy remains committed to creating environments that are dynamic, sustainable, and tailored to the needs of modern lifestyles in Qatar." }
+      ]
+    },
+    {
+      slug: "bim-digital-innovation-qatar",
+      image: "https://images.unsplash.com/photo-1606768666853-403c90a981ad?w=1600&auto=format&fit=crop&q=60",
+      category: "Digital Innovation",
+      author: "Taj Design Experts",
+      date: "November 26, 2024",
+      title: "The Role of BIM and Digital Innovation in Transforming Architectural and Engineering Consultancy",
+      subtitle: "Exploring how Building Information Modeling (BIM) and digital tools are raising the standard for design, efficiency, and collaboration in the Middle East.",
+      content: [
+        { type: 'paragraph', text: "The architecture and engineering landscape is rapidly evolving, thanks in large part to digital technologies that are raising the standard for design, efficiency, and collaboration. Among these, Building Information Modeling (BIM) has emerged as a game-changer, fostering a new era of precision and integrated project delivery in Qatar and across the Middle East." },
+        { type: 'heading', text: "What is BIM and Why Does It Matter?" },
+        { type: 'paragraph', text: "Building Information Modeling (BIM) is more than just 3D design software, it's a holistic process that brings together all project stakeholders and information into a shared digital environment. This allows architects, engineers, and clients to collaborate effectively, visualize the building at every stage, and make informed decisions before a single brick is laid." },
+        { type: 'paragraph', text: "By utilizing BIM, firms like Taj Design Consultancy are able to:" },
+        { type: 'list', items: [
+            "Create highly accurate and coordinated building models",
+            "Identify and resolve design clashes early, reducing costly changes during construction",
+            "Simulate building performance, allowing for optimization of energy use, sunlight, and airflow",
+            "Generate detailed schedules and cost estimates, increasing transparency for clients"
+        ]},
+        { type: 'image', src: 'https://i.imgur.com/8T4f2sN.jpeg', captionTitle: 'Shared Digital Environment', captionText: 'BIM brings all project stakeholders and information into a unified digital model, enhancing collaboration.' },
+        { type: 'heading', text: "Enhancing Collaboration and Reducing Risk" },
+        { type: 'paragraph', text: "One of the most significant benefits of BIM is its ability to minimize miscommunication and duplication of work. All parties, architects, structural engineers, mechanical teams, and contractors, work from the same digital model, ensuring consistency and clarity throughout the project's lifecycle. This not only saves time but helps projects stay on schedule and within budget." },
+        { type: 'heading', text: "Driving Sustainable and Efficient Design" },
+        { type: 'paragraph', text: "BIM empowers teams to assess sustainability options earlier in the design process. Energy models, material take-offs, and environmental impact studies can be run virtually, supporting eco-friendly design decisions and compliance with Qatar's green building regulations." },
+        { type: 'heading', text: "Staying at the Forefront with Digital Innovation" },
+        { type: 'paragraph', text: "Beyond BIM, the use of advanced design tools, cloud-based collaboration platforms, and data analytics is transforming how consultancies manage projects and communicate with clients. Digital innovation is enabling architectural and engineering firms in Qatar to deliver smarter, more resilient, and cost-effective buildings." },
+        { type: 'blockquote', text: "Firms that embrace these technologies are not only increasing their competitiveness but are laying the foundation for a more sustainable and dynamic built environment." },
+        { type: 'heading', text: "Looking to the Future" },
+        { type: 'paragraph', text: "As Qatar's construction sector adopts global best practices, the role of BIM and digital innovation will become even more central to successful project delivery. Firms that embrace these technologies are not only increasing their competitiveness but are laying the foundation for a more sustainable and dynamic built environment." }
+      ]
+    },
+    {
+      slug: "securing-construction-approvals-qatar",
+      image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=1600&auto=format&fit=crop&q=60",
+      category: "Approvals",
+      author: "Taj Design Experts",
+      date: "November 19, 2024",
+      title: "Securing Construction Approvals in Qatar: A Practical Guide for Developers",
+      subtitle: "Understanding the path from concept to completion, navigating regulations, preparing documentation, and ensuring a smooth journey from vision to reality.",
+      content: [
+        { type: 'paragraph', text: "For developers eager to bring innovative projects to life in Qatar, understanding the process of securing construction approvals is crucial. The path from concept to completion involves navigating regulations, preparing meticulous documentation, and maintaining clear communication with authorities. With the right guidance, developers can avoid delays and ensure a smooth journey from vision to reality." },
+        { type: 'heading', text: "Understanding the Approval Landscape" },
+        { type: 'paragraph', text: "Qatar's rapid urban growth means regulatory bodies pay close attention to safety, sustainability, and quality standards. Each construction project, whether commercial, residential, or mixed-use, must comply with national and municipal regulations before work can begin." },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1563291074-2bf8677ac0e5?w=800&auto=format&fit=crop&q=60', captionTitle: 'Construction Permit Approved', captionText: 'Securing the right permits is a critical milestone in any construction project in Qatar.' },
+        { type: 'heading', text: "Step 1: Initial Project Consultation" },
+        { type: 'paragraph', text: "Engaging an experienced architectural and engineering consultancy at the outset can streamline the entire approval process. Consultants help interpret regulatory requirements, offer guidance on project feasibility, and highlight any unique considerations for your development." },
+        { type: 'heading', text: "Step 2: Preliminary Design and Compliance Review" },
+        { type: 'paragraph', text: "Once a project concept is defined, preliminary drawings are prepared and reviewed against local codes for zoning, safety, energy efficiency, and environmental standards. Adjustments are made early to minimize the risk of rejection at later stages." },
+        { type: 'heading', text: "Step 3: Preparing Detailed Submission Documents" },
+        { type: 'paragraph', text: "After the concept passes the initial review, the next step is developing comprehensive construction drawings, technical specifications, and supporting reports. This documentation is submitted to the relevant municipal or government authorities for formal appraisal." },
+        { type: 'heading', text: "Step 4: Authority Engagement and Feedback" },
+        { type: 'paragraph', text: "Authorities may request clarifications, revisions, or additional information. Close collaboration between the developer, consultancy, and relevant agencies ensures timely responses and minimizes back-and-forth." },
+        { type: 'heading', text: "Step 5: Securing the Building Permit" },
+        { type: 'paragraph', text: "Once all requirements are fulfilled and approvals granted, the official building permit is issued. This clears the way for contractors to mobilize and construction to proceed, with ongoing inspections to ensure compliance throughout the build." },
+        { type: 'heading', text: "Step 6: Final Inspection and Handover" },
+        { type: 'paragraph', text: "At project completion, authorities carry out final inspections to verify adherence to approved plans and safety standards. Successful sign-off leads to handover and eventual occupancy of the new building." },
+        { type: 'heading', text: "Why Expert Guidance Matters" },
+        { type: 'paragraph', text: "Partnering with a knowledgeable architectural and engineering consultancy, like Taj Design Consultancy, is invaluable for developers. Their experience navigating Qatar's approval system leads to efficient documentation, faster approvals, and fewer surprises along the way." }
+      ]
+    },
+    { 
+      slug: "sustainable-design-middle-east",
+      image: "https://images.unsplash.com/photo-1558992093-dba0d78ac498?w=1600&auto=format&fit=crop&q=60", 
+      category: "Sustainability", 
+      author: "Taj Design Experts",
+      date: "November 12, 2024", 
+      title: "Sustainable Design: Integrating Green Practices in Modern Middle Eastern Construction",
+      subtitle: "As urbanization accelerates, eco-conscious architectural and engineering firms are prioritizing environmentally responsible design from project inception to completion.",
+      content: [
+        { type: 'paragraph', text: "Sustainability is no longer a buzzword, it's a necessity, especially in the fast-evolving construction landscape of the Middle East. As urbanization accelerates across cities like Doha, eco-conscious architectural and engineering firms are leading the way by prioritizing environmentally responsible design choices from project inception to completion." },
+        { type: 'heading', text: "The Imperative of Sustainable Building in the Middle East" },
+        { type: 'paragraph', text: "With unique climate challenges, the Middle East has a vital role in setting benchmarks for sustainable construction. Leading firms, including Taj Design Consultancy, are responding to the region's needs by introducing advanced energy-saving technologies and resource-efficient designs. This not only aligns with local green building regulations but also reduces operational costs for clients." },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&auto=format&fit=crop&q=60', captionTitle: 'Eco-Conscious Living Spaces', captionText: 'Integrating greenery and natural light is key to sustainable design in modern construction.' },
+        { type: 'heading', text: "Materials and Methods for a Greener Tomorrow" },
+        { type: 'paragraph', text: "The adoption of locally sourced, recyclable, and low-VOC (volatile organic compound) materials is gaining momentum in Qatar's construction sector. Insulation improvements, innovative facade treatments, and high-performance glazing are modern solutions that enhance indoor comfort while minimizing energy use. Water conservation is another top priority; innovative plumbing fixtures, greywater recycling, and drought-resistant landscaping are increasingly standard in new projects." },
+        { type: 'heading', text: "Designing with the Environment in Mind" },
+        { type: 'paragraph', text: "Passive design strategies like orientation, natural ventilation, and shading, are at the core of environmentally friendly architecture. Combined with renewable energy systems such as solar panels and smart building management technologies, these approaches enable buildings to achieve greater efficiency and leave a smaller environmental footprint." },
+        { type: 'blockquote', text: "The move toward sustainable construction is not only about regulatory compliance, it's about creating healthier, more resilient spaces for future generations." },
+        { type: 'heading', text: "Regulatory Support and Client Benefits"},
+        { type: 'paragraph', text: "Qatar's national vision promotes sustainability across all industries, with regulations that encourage developers to adopt green practices. Architectural and engineering consultancies guide clients through the certification process, ensuring that buildings meet, and often exceed, requirements for energy, water, and resource efficiency. With every project, firms like Taj Design Consultancy help shape communities that are robust, adaptable, and environmentally responsible."}
+      ]
+    },
     { 
       slug: "sustainable-renovation-qatar",
       image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=1600&auto=format&fit=crop&q=60", 
@@ -64,31 +183,25 @@ const blogPosts = [
       ]
     },
     { 
-      slug: "the-future-of-bim",
-      image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop&q=60", 
-      category: "Technology", 
-      author: "John Smith",
-      date: "August 15, 2024", 
-      title: "The Future of BIM: AI and Generative Design",
-      subtitle: "A detailed look into how Building Information Modeling is evolving with artificial intelligence.",
+      slug: "architectural-innovation-qatar",
+      image: "https://images.unsplash.com/photo-1594434533431-597a18855497?w=1600&auto=format&fit=crop&q=60",
+      category: "Architecture",
+      author: "Taj Design Experts",
+      date: "October 28, 2024",
+      title: "How Architectural Innovation is Shaping Qatar's Urban Future",
+      subtitle: "Forward-thinking architecture and engineering firms are blending creativity, technical excellence, and sustainability to craft the country's future.",
       content: [
-        { type: 'paragraph', text: 'Building Information Modeling (BIM) is undergoing a profound transformation, driven by the integration of artificial intelligence and generative design. These technologies are not merely enhancing existing workflows; they are fundamentally reshaping how we conceive, design, and construct buildings, paving the way for a smarter, more sustainable, and efficient future.' },
-        { type: 'blockquote', text: 'Generative design, powered by AI algorithms, can explore thousands of design permutations, optimizing for factors like spatial efficiency, material usage, structural integrity, and energy performance far beyond human capacity.' },
-        { type: 'paragraph', text: 'The practical applications are immense. Architects can now input a set of constraints—such as site boundaries, budget, desired adjacencies, and performance targets—and allow the AI to generate a range of optimized design options. This frees designers from repetitive tasks and allows them to focus on higher-level creative and strategic decisions. As we move forward, the synergy between human creativity and machine intelligence will unlock unprecedented possibilities in architecture.' },
-      ]
-    },
-    { 
-      slug: "minimalism-and-light",
-      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=60", 
-      category: "Interior Design", 
-      author: "Emily White",
-      date: "August 05, 2024", 
-      title: "Minimalism and Light: Crafting Serene Spaces",
-      subtitle: "Discover the principles of minimalist interior design and the crucial role of light in creating calm and functional spaces.",
-      content: [
-          { type: 'paragraph', text: 'Minimalist interior design is more than just an aesthetic; it is a philosophy centered on simplicity, functionality, and the intentional use of space. At its core, minimalism seeks to strip away the superfluous to reveal the essential, creating environments that are calm, uncluttered, and conducive to well-being. A key element in achieving this is the masterful manipulation of light, both natural and artificial.'},
-          { type: 'image', src: 'https://images.unsplash.com/photo-1556702581-2c7004d4a192?w=800&auto=format&fit=crop&q=60', captionTitle: 'The Play of Shadows', captionText: 'Light is not just for illumination; it is a material that can be used to sculpt space, define form, and evoke emotion.' },
-          { type: 'paragraph', text: 'Natural light is paramount. Large, unadorned windows, skylights, and strategically placed mirrors can flood a room with daylight, making it feel larger and more open. Artificial lighting, in turn, should be layered and purposeful. A combination of ambient, task, and accent lighting allows for flexibility, highlighting architectural features, illuminating specific activities, and setting the mood. In a minimalist space, every element must have a purpose, and light is the silent partner that brings the entire composition to life.' }
+        { type: 'paragraph', text: "Qatar is experiencing a wave of transformation as its cities expand and new districts emerge. Behind this impressive progress are forward-thinking architecture and engineering consultancy firms that blend creativity, technical excellence, and sustainability to craft the country's future." },
+        { type: 'heading', text: "Setting the Pace for Urban Excellence" },
+        { type: 'paragraph', text: "Architectural innovation in Qatar is about more than impressive skylines, it's about creating spaces that enhance the lives of those who use them. Firms like Taj Design Consultancy are at the forefront, designing commercial towers, residential complexes, and mixed-use developments that define modern Qatar. Their detailed approach ensures that each project reflects local culture, meets client needs, and responds to the environment it inhabits." },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1594434533431-597a18855497?w=800&auto=format&fit=crop&q=60', captionTitle: "Modern Qatari Architecture", captionText: "Iconic structures are redefining the urban landscape of Doha." },
+        { type: 'heading', text: "Focus on Sustainable Urban Development" },
+        { type: 'paragraph', text: "Today's leading designs incorporate sustainable practices right from the initial planning stages. Emphasizing eco-friendly materials and energy-efficient systems, Qatar's most successful projects not only adhere to local environmental standards but also reduce long-term costs for property owners. Sustainability has become a cornerstone of modern design, aligning new developments with global best practices and Qatar's national vision." },
+        { type: 'heading', text: "Guiding Projects Through Regulatory Challenges" },
+        { type: 'paragraph', text: "In a rapidly growing market, understanding and navigating the construction approval process is essential. With years of experience in the Qatari regulatory environment, architectural and engineering consultants help clients secure timely permits, comply with building codes, and avoid costly delays. This expertise leads to smoother project timelines and greater peace of mind for developers." },
+        { type: 'heading', text: "A Diverse Portfolio for a Dynamic Market" },
+        { type: 'paragraph', text: "From business centers in the heart of Doha to educational and healthcare facilities in expanding suburbs, a strong consultancy portfolio showcases versatility. This diversity means that firms like Taj Design Consultancy can bring innovative solutions to a wide range of projects, always prioritizing quality, safety, and functional aesthetics." },
+        { type: 'blockquote', text: "As Qatar continues to invest in its infrastructure and cityscapes, the work of leading architectural and engineering consultancy firms will have a lasting impact. Their ability to combine local knowledge with international standards ensures that new developments contribute positively to the country's urban fabric for generations to come." }
       ]
     }
 ];
