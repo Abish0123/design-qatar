@@ -97,7 +97,7 @@ const blogPosts = [
     },
     {
       slug: "securing-construction-approvals-qatar",
-      image: "https://media.istockphoto.com/id/155035293/photo/building-permit.jpg?s=612x612&w=0&k=20&c=UWwC-Im7dj_GgazxjElGw2bv2a_mrbnXMW0a6DiyryE=",
+      image: "https://media.istockphoto.com/id/155035293/photo/building-permit.jpg?s=612x612&w=0&k=20&c=UWwC-Im7dj_GgazxjElGw2bv2a_mrbnXMW0a6DiyryE=1600&auto=format&fit=crop&q=60",
       category: "Approvals",
       author: "Taj Design Experts",
       date: "November 19, 2024",
